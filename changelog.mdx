@@ -1,0 +1,116 @@
+---
+title: Changelog
+description: Version history, recent updates, and changes to Hotline UGC platform.
+---
+
+## Recent Updates
+
+Stay informed about the latest improvements to Hotline UGC. You receive notifications for major releases directly in your dashboard under Settings > Updates.
+
+<Callout kind="info">
+  Check the [Hotline UGC dashboard](https://dashboard.example.com/settings/updates) for release notes tailored to your account.
+</Callout>
+
+<Update label="2024-12-05" description="v1.3.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added real-time ROAS tracking for live ads, showing iROAS updates every 5 minutes.
+- Introduced payout caps per creative, helping you control royalties based on performance thresholds.
+- New analytics filters for top-performing creators by hook rate, CTR, and NC CPA.
+
+## Improvements
+
+- Enhanced Meta Ads integration for faster video uploads and variant management.
+- Dashboard now supports aggregated and individual creative views with customizable metrics.
+
+## Bug Fixes
+
+- Fixed spend tracking discrepancies in multi-currency accounts (A$, USD).
+- Resolved payout calculation errors when ads transition from Live to Paused status.
+
+</Update>
+
+<Update label="2024-11-20" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Creator briefing workflow with templates for hooks, routines, and product audits.
+- Integrated Stripe for automated royalty payouts based on conversion value.
+- Top Performing Creatives board with performance heatmaps (ROAS, hook rate).
+
+## Bug Fixes
+
+- Corrected NC CPA calculations for videos with low purchase volumes.
+- Fixed dashboard refresh issues during high-volume ad tracking.
+
+## Improvements
+
+- Optimized analytics load times by 40% for accounts with 50+ active ads.
+
+</Update>
+
+<Update label="2024-10-15" description="v1.1.0" tags={["feature", "breaking"]}>
+
+## New Features
+
+- Full Meta Ads pipeline: brief creators, ship videos, track spend/revenue.
+- Royalties dashboard showing total generated vs. paid, with creator breakdowns.
+- Shopify integration for direct product feeds in briefs.
+
+## Breaking Changes
+
+- Updated API endpoints for ad metrics; migrate to `/v2/metrics` for ROAS data.
+- Payout logic now requires explicit cap settings (defaults to uncapped).
+
+## Bug Fixes
+
+- Patched webhook failures for Klaviyo event syncing.
+
+</Update>
+
+## Upcoming Roadmap
+
+Track upcoming features and improvements in our public roadmap.
+
+<Board title="Q1 2025 Roadmap">
+  <BoardColumn title="Planned" color="0" icon="calendar">
+    <BoardCard title="Klaviyo Automation" description="Auto-trigger briefs from email campaigns" icon="mail" dueDate="2025-02-15" />
+    <BoardCard title="Creator Marketplace" description="Discover vetted UGC creators" icon="users" />
+  </BoardColumn>
+  <BoardColumn title="In Progress" color="1" icon="loader-2">
+    <BoardCard title="Advanced Analytics" description="Predictive ROAS modeling" icon="trending-up" author="Engineering" />
+  </BoardColumn>
+  <BoardColumn title="Completed" color="2" icon="check-circle">
+    <BoardCard title="Stripe Payouts v2" description="Batch processing support" createdAt="2024-12-05" />
+  </BoardColumn>
+</Board>
+
+## Stay Updated
+
+Follow these steps to ensure you always have the latest version.
+
+<Steps>
+  <Step title="Enable Notifications" icon="bell">
+    In your dashboard, go to Settings > Notifications and toggle "Release Notes".
+  </Step>
+  <Step title="Check for Updates" icon="refresh-cw">
+    Visit Analytics > Overview weekly to review new metrics.
+  </Step>
+  <Step title="Join Beta" icon="zap">
+    Sign up for early access at `/beta` to test features first.
+  </Step>
+</Steps>
+
+<Columns cols={2}>
+  <Card title="Quickstart" icon="book-open" href="/quickstart">
+    Get started with your first UGC campaign.
+  </Card>
+  <Card title="API Reference" icon="code" href="/authentication">
+    Integrate programmatically with our APIs.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Have feedback? Share it via the dashboard or join our community forum.
+</Callout>

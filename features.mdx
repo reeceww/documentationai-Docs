@@ -1,0 +1,138 @@
+---
+title: Core Features
+description: Detailed walkthrough of Hotline UGC's core capabilities for managing creators, campaigns, and performance tracking.
+---
+
+## Overview
+
+Hotline UGC provides a comprehensive platform for briefing creators, managing video production, and tracking performance directly tied to Meta Ads revenue. You gain full visibility into ROAS, spend, and royalties, enabling data-driven decisions for your campaigns. Key capabilities include real-time dashboard analytics, streamlined creator workflows, video approval processes, and insights into top-performing creatives.
+
+<Columns cols={3}>
+  <Card title="Dashboard Analytics" icon="bar-chart-3" href="#dashboard-analytics">
+    Monitor ROAS, spend, revenue, and royalties across all campaigns.
+  </Card>
+  <Card title="Creator Management" icon="users" href="#creator-management">
+    Brief creators, track submissions, and handle payouts based on performance.
+  </Card>
+  <Card title="Video Workflows" icon="video" href="#video-workflows">
+    Approve, revise, and deploy videos to Meta Ads with revision tracking.
+  </Card>
+</Columns>
+
+<Callout kind="info">
+  All metrics update in real-time as ad spend and revenue flow through your integrated accounts.
+</Callout>
+
+## Dashboard Analytics
+
+Access a centralized dashboard showing key metrics like total spend tracked, revenue generated, ROAS, and royalties paid. Filter by time periods or campaigns to identify high-performers.
+
+<Tabs>
+  <Tab title="Last 30 Days" icon="calendar">
+    View aggregated data:
+
+    | Metric              | Value     | Change |
+    |---------------------|-----------|--------|
+    | Total Spend         | A$84,120 | +18%  |
+    | Revenue Generated   | A$269,186| +24%  |
+    | ROAS                | 3.2x     | +15%  |
+    | Total Royalties     | A$9,417  | +31%  |
+  </Tab>
+  <Tab title="All Time" icon="clock">
+    Lifetime totals provide long-term trends for strategic planning.
+  </Tab>
+</Tabs>
+
+Integrate webhooks to automatically track revenue from Meta Ads.
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+  // Webhook handler for revenue events
+  app.post('/webhook/revenue', (req, res) => {
+    const { campaignId, revenue, adId } = req.body;
+    // Sync with Hotline UGC API
+    fetch('https://api.hotlineugc.com/v1/campaigns/' + campaignId + '/revenue', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer YOUR_API_KEY' },
+      body: JSON.stringify({ revenue, adId })
+    });
+    res.status(200).send('OK');
+  });
+  ```
+  ```python
+  # Webhook handler using Flask
+  from flask import Flask, request
+  import requests
+
+  app = Flask(__name__)
+
+  @app.route('/webhook/revenue', methods=['POST'])
+  def webhook():
+      data = request.json
+      campaign_id = data['campaignId']
+      revenue = data['revenue']
+      ad_id = data['adId']
+      # Sync with Hotline UGC
+      requests.post(
+          f'https://api.hotlineugc.com/v1/campaigns/{campaign_id}/revenue',
+          headers={'Authorization': 'Bearer YOUR_API_KEY'},
+          json={'revenue': revenue, 'ad_id': ad_id}
+      )
+      return 'OK', 200
+  ```
+</CodeGroup>
+
+## Creator Briefing and Management
+
+Brief creators directly in the platform with customizable templates for hooks, scripts, and deliverables.
+
+<Steps>
+  <Step title="Create Brief" icon="file-text">
+    Define campaign goals, target audience, and video specs (e.g., 15-30s hooks for Meta Ads).
+  </Step>
+  <Step title="Assign Creators" icon="user-plus">
+    Select from your roster or invite new ones. Set royalty rates based on expected ROAS.
+  </Step>
+  <Step title="Track Progress" icon="activity">
+    Monitor submissions and performance. Payouts auto-calculate on verified revenue.
+  </Step>
+</Steps>
+
+<Expandable title="Advanced Payout Rules" default-open="false">
+  Configure caps, minimum ROAS thresholds, and tiered royalties for optimal budget control.
+</Expandable>
+
+## Video Approval and Revision Workflows
+
+Manage the full lifecycle from submission to live ads. Request revisions with inline feedback.
+
+<Board title="Video Workflow Status">
+  <BoardColumn title="Briefed" color="0" icon="file">
+    <BoardCard title="Morning Routine Hook" author="Priya Raman" createdAt="2024-10-01" />
+  </BoardColumn>
+  <BoardColumn title="Submitted" color="1" icon="upload">
+    <BoardCard title="Gym Bag Staple" description="Awaiting hook review" author="Dana Whitlock" dueDate="2024-10-15" />
+  </BoardColumn>
+  <BoardColumn title="Approved & Live" color="2" icon="check-circle">
+    <BoardCard title="Faster Than Coffee" description="41 variants live" author="Tomas Berg" />
+  </BoardColumn>
+  <BoardColumn title="Paused" color="3" icon="pause-circle">
+    <BoardCard title="Breakfast Audit" description="Payout cap reached" author="Simone Achebe" />
+  </BoardColumn>
+</Board>
+
+## Top-Performing Creatives
+
+Review top videos by ROAS, CTR, hook rate, and purchases. Switch between aggregated and individual views.
+
+<Callout kind="tip">
+  Prioritize scaling creators with iROAS `{>2x}` and hook rates `{>30%}`.
+</Callout>
+
+| Creative             | ROAS | Spend    | Revenue   | Hook Rate |
+|----------------------|------|----------|-----------|-----------|
+| Morning Routine Hook | 4.07x| A$11,842 | A$48,204 | 32.4%    |
+| Faster Than Coffee   | 3.40x| A$9,376  | A$31,880 | 28.1%    |
+| Gym Bag Staple       | 2.60x| A$4,630  | A$12,040 | 24.6%    |
+
+Use these insights to duplicate high-performers and pause underperformers.
