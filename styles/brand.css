@@ -119,17 +119,23 @@
 }
 
 /* The kit's reversed pairing: citron on the deep green field, which is
-   the inversion the site uses for its one dark band. Cards lift to
-   forest so a panel separates from the page the way it does in light. */
+   the inversion the site uses for its one dark band. */
 :root.dark,
 :root[data-theme="dark"],
 html.dark,
 .dark-mode {
+  /* `--card` and `--popover` track `--background` rather than lifting
+     off it, which is the relationship the theme ships in both modes and
+     is load bearing. The previous/next footer links are `bg-card` with
+     square corners and no border, sized to their text: they are meant
+     to be invisible, and a card colour that differs from the page turns
+     each one into a hard-edged rectangle. Overlays get their separation
+     from a border and a shadow, not from a fill. */
   --background: #0c281c;
   --content-bg: #0c281c;
   --navbar-bg: #0c281c;
-  --card: #143d2b;
-  --popover: #143d2b;
+  --card: #0c281c;
+  --popover: #0c281c;
   --primary: #0c281c;
   --sidebar: #0c281c;
   --sidebar-bg: #0c281c;
@@ -182,8 +188,8 @@ html.dark,
     --background: #0c281c;
     --content-bg: #0c281c;
     --navbar-bg: #0c281c;
-    --card: #143d2b;
-    --popover: #143d2b;
+    --card: #0c281c;
+    --popover: #0c281c;
     --body: #fbfcec;
     --foreground: #fbfcec;
     --heading: #fbfcec;
