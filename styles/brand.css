@@ -107,6 +107,12 @@
   --info: #49604e;
   --info-muted: rgba(20, 61, 43, 0.06);
 
+  /* `tip` renders through the note pair, which ships blue. A tip is
+     helpful rather than hazardous, so it takes the citron side of the
+     kit instead. Alert stays amber and danger stays red. */
+  --note: #55631a;
+  --note-muted: rgba(220, 233, 98, 0.34);
+
   --selection-bg: rgba(20, 61, 43, 0.14);
 
   color-scheme: light;
@@ -159,6 +165,9 @@ html.dark,
 
   --info: rgba(251, 252, 236, 0.8);
   --info-muted: rgba(251, 252, 236, 0.07);
+
+  --note: #dce962;
+  --note-muted: rgba(220, 233, 98, 0.12);
 
   --selection-bg: rgba(220, 233, 98, 0.22);
 
