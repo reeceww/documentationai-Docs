@@ -57,11 +57,11 @@
       {
         "tab": "API Reference",
         "icon": "code",
-        "groups": [
+        "pages": [
           {
-            "group": "Endpoints",
-            "openapi": "api-reference/openapi.yaml",
-            "pages": []
+            "title": "Overview",
+            "path": "api-reference/overview",
+            "icon": "info"
           }
         ]
       },

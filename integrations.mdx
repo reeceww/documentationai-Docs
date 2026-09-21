@@ -1,175 +1,119 @@
 ---
 title: Integrations
-description: How to connect Hotline UGC with Shopify, Meta, Klaviyo, Stripe, and other tools for seamless workflows.
+description: Meta, Shopify and Stripe: what each one connects, what it can see, and what it is allowed to change.
 ---
 
 ## Overview
 
-Hotline UGC integrates seamlessly with your favorite e-commerce and marketing tools. Connect Shopify to pull product data automatically, upload videos directly to Meta Ads Manager, sync customer events with Klaviyo, and handle creator royalties via Stripe. These integrations streamline your UGC workflow from briefing creators to performance tracking.
+Hotline connects to three services today. Each one is optional except Meta, which the core loop depends on.
 
-<Columns cols={2}>
+<Columns cols={3}>
+  <Card title="Meta" icon="megaphone" href="#meta">
+    Publish approved videos into your ad account and read their performance.
+  </Card>
   <Card title="Shopify" icon="shopping-cart" href="#shopify">
-    Sync product catalogs and inventory in real-time.
-  </Card>
-  <Card title="Meta Ads" icon="facebook" href="#meta">
-    Upload and manage ad creatives directly.
-  </Card>
-  <Card title="Klaviyo" icon="mail" href="#klaviyo">
-    Trigger personalized campaigns based on UGC performance.
+    Mirror your catalogue so creators can request free product.
   </Card>
   <Card title="Stripe" icon="credit-card" href="#stripe">
-    Automate royalty payouts to creators.
+    Pay creators into accounts they own.
+  </Card>
+</Columns>
+
+All three are connected from **Settings**, not during onboarding, and in whatever order you like.
+
+## Meta
+
+The one integration the product does not work without. It publishes your approved videos and reads back what they did.
+
+### What it can do
+
+Hotline creates ads in your ad account **paused**. Nothing it publishes can spend money until a person turns it on in Meta.
+
+It reads spend, impressions, clicks, reach, video plays, purchases and purchase value for the ads it created, every two hours, and attaches them to the video and creator behind each ad.
+
+### Permissions requested
+
+| Permission | Why |
+|---|---|
+| `ads_read` | Read performance for the ads Hotline created |
+| `ads_management` | Create the ad, its creative and its adset |
+| `business_management` | Resolve which ad accounts you have access to |
+| `pages_read_engagement`, `pages_show_list` | Identify the Page an ad runs from |
+| `instagram_basic` | Read the linked Instagram account |
+| `instagram_branded_content_ads_brand` | Run partnership ads under a creator's handle, when enabled |
+
+<Callout kind="info">
+  Your ad account, pixel and audiences stay yours. Hotline never sets a budget, never changes a bid, and never turns an ad on.
+</Callout>
+
+### Connecting
+
+<Steps>
+  <Step title="Open Settings" icon="settings">
+    Find the Meta card in **Settings**.
+  </Step>
+  <Step title="Authorise" icon="shield">
+    Sign in to Meta and grant access. Revoking access later leaves ads already published running; they simply stop reporting back into Hotline.
+  </Step>
+  <Step title="Choose the ad account" icon="link">
+    Pick the ad account this workspace publishes into and reads from.
+  </Step>
+</Steps>
+
+## Shopify
+
+Connect a store and Hotline mirrors your product catalogue, so creators can ask for the products they need to film with.
+
+### What it can do
+
+<Callout kind="warning">
+  Hotline **writes to your store**. It creates a draft order at a 100% discount and completes it, which is how a gift reaches a creator. That is the only order it ever creates, and no payment method is used.
+</Callout>
+
+| Scope | Why |
+|---|---|
+| `read_products` | Mirror the catalogue creators choose from |
+| `read_inventory` | Avoid offering something out of stock |
+| `read_orders`, `read_fulfillments` | Track a gift parcel through to delivery |
+| `write_draft_orders` | Create the gift order itself |
+
+Hotline does not read your customer records and stores no Shopify customer identifier. A creator's name, email and shipping address are supplied by the creator and passed to Shopify only so the order can be shipped to them.
+
+### Connecting
+
+Install Hotline UGC from the Shopify App Store onto your store, then link it to your workspace when the app prompts you. Once linked, sync your products from the app's setup section and the catalogue appears under **Hub**.
+
+## Stripe
+
+Creator payouts run on **Stripe Connect**.
+
+Creators onboard to Stripe themselves, so the money lands in an account they own and control. Hotline never holds creator funds: a pay run charges the brand first and pays creators only once that payment settles.
+
+<Steps>
+  <Step title="Connect the workspace" icon="link">
+    Open the Stripe card in **Settings** and connect your account.
+  </Step>
+  <Step title="Creators onboard" icon="user-check">
+    Each creator completes Stripe onboarding from their own Earnings page. Until they do, a balance can accrue but cannot be paid out.
+  </Step>
+  <Step title="Run a pay run" icon="dollar-sign">
+    From **Payouts**, pay everyone whose balance has cleared its hold period and reached the minimum.
+  </Step>
+</Steps>
+
+## Not available yet
+
+Two integrations appear in Settings as placeholders so you can see what is coming. Neither does anything today.
+
+<Columns cols={2}>
+  <Card title="Klaviyo" icon="mail">
+    Planned: send your best performing creator content into campaigns, show creator attributed revenue beside your email and SMS numbers, and sync creators as profiles.
+  </Card>
+  <Card title="Slack" icon="message-square">
+    Planned: new uploads posted to a channel, approvals answered without leaving Slack, and pay run confirmations for a finance channel.
   </Card>
 </Columns>
 
 <Callout kind="info">
-  Ensure you have admin access to each platform before starting. All integrations use secure OAuth or API keys.
-</Callout>
-
-## Integration Workflows
-
-Use the following tabs to set up each integration. Each process takes under 5 minutes.
-
-<Tabs>
-  <Tab title="Shopify" icon="shopping-cart">
-
-## Prerequisites
-
-- Active Shopify store
-- Hotline UGC account with admin permissions
-
-<Steps>
-  <Step title="Install App" icon="download">
-    Visit the Shopify App Store, search for "Hotline UGC", and click **Install**.
-  </Step>
-  <Step title="Authorize Access" icon="key">
-    Grant permissions for products, orders, and inventory. Hotline UGC only reads data.
-  </Step>
-  <Step title="Sync Products" icon="refresh-cw">
-    In your Hotline dashboard, go to **Settings > Integrations > Shopify** and click **Sync Now**.
-  </Step>
-</Steps>
-
-<CodeGroup tabs="Webhook,API">
-````javascript
-// Webhook for new orders
-fetch('https://api.hotlineugc.com/webhooks/shopify/order-created', {
-  method: 'POST',
-  headers: { 'Authorization': 'Bearer YOUR_API_KEY' },
-  body: JSON.stringify(orderData)
-});
-````
-````bash
-# API call to fetch products
-curl -X GET 'https://api.hotlineugc.com/shopify/products' \
-  -H 'Authorization: Bearer YOUR_API_KEY'
-````
-</CodeGroup>
-
-  </Tab>
-
-  <Tab title="Meta Ads" icon="facebook">
-
-## Prerequisites
-
-- Meta Business Manager account
-- Ads account with creative permissions
-
-<Steps>
-  <Step title="Connect Account" icon="link">
-    Navigate to **Settings > Integrations > Meta** in Hotline UGC.
-  </Step>
-  <Step title="Authenticate" icon="shield">
-    Click **Connect Meta**, log in, and select your ad account.
-  </Step>
-  <Step title="Upload Video" icon="upload">
-    Select a creator video in the **Hub**, then **Publish to Meta**. It auto-optimizes for ads.
-  </Step>
-</Steps>
-
-```mermaid
-sequenceDiagram
-    Creator->>Hotline: Submit Video
-    Hotline->>Meta: Upload Creative
-    Meta->>Hotline: Ad ID
-    Hotline->>Dashboard: Track Performance
-```
-
-  </Tab>
-
-  <Tab title="Klaviyo" icon="mail">
-
-## Sync Marketing Events
-
-Push UGC performance data to Klaviyo for targeted flows.
-
-<Steps>
-  <Step title="Get API Key" icon="key">
-    In Klaviyo, go to **Settings > API Keys** and create a private key.
-  </Step>
-  <Step title="Configure in Hotline" icon="settings">
-    Enter the key in **Hotline > Settings > Klaviyo**.
-  </Step>
-  <Step title="Test Event" icon="play">
-    Trigger a test event from **Analytics > Export** to verify sync.
-  </Step>
-</Steps>
-
-<ParamField header="X-Klaviyo-API-Key" param-type="string" required="true">
-  Your private API key from Klaviyo.
-</ParamField>
-
-  </Tab>
-
-  <Tab title="Stripe" icon="credit-card">
-
-## Automated Payouts
-
-Set up Stripe Connect for seamless creator payments based on revenue.
-
-<Steps>
-  <Step title="Enable Stripe Connect" icon="toggle-right">
-    Go to **Settings > Payouts > Stripe** and enable.
-  </Step>
-  <Step title="Connect Stripe Account" icon="link">
-    Creators onboard via Stripe Express during briefing.
-  </Step>
-  <Step title="Configure Royalties" icon="percent">
-    Set payout rules (e.g., 10% of tracked revenue) in **Payouts**.
-  </Step>
-</Steps>
-
-<Expandable title="Advanced Payout Rules" default-open="false">
-
-Define custom thresholds:
-
-````javascript
-// Example royalty calculation
-const royalty = (revenue * 0.10) > 300 ? revenue * 0.10 : 0;
-````
-
-</Expandable>
-
-  </Tab>
-</Tabs>
-
-## Next Steps
-
-After setup, monitor integrations in the **Analytics** dashboard. Use webhooks for real-time updates.
-
-<Board title="Integration Status">
-  <BoardColumn title="Connected" color="2" icon="check-circle">
-    <BoardCard title="Shopify Sync" description="Products updating every 15min" icon="shopping-cart" />
-    <BoardCard title="Meta Uploads" description="5 creatives live" icon="facebook" />
-  </BoardColumn>
-  <BoardColumn title="Pending" color="1" icon="loader">
-    <BoardCard title="Klaviyo Events" dueDate="2024-12-15" />
-  </BoardColumn>
-  <BoardColumn title="Needs Review" color="0" icon="alert-triangle">
-    <BoardCard title="Stripe Payouts" description="Verify tax forms" author="Finance" />
-  </BoardColumn>
-</Board>
-
-<Callout kind="tip">
-  Test each integration with sample data before going live. Contact support@hotlineugc.com for issues.
+  There is no public Hotline API today. See the [API Reference](/api-reference/overview) for what that means in practice.
 </Callout>
