@@ -45,12 +45,22 @@
 }
 
 /* The kit's reversed pairing: the deep green field carrying citron,
-   which is the same inversion the site uses for its one dark band. */
+   which is the same inversion the site uses for its one dark band.
+   
+   Declared once and referenced from several selectors, because the
+   theme's dark switch is not ours: it may be a class, a data attribute
+   or the OS preference. Whichever one fires, it lands on the same
+   values, and a selector that never matches costs nothing. The media
+   query is guarded so an explicitly light page on a dark OS is not
+   dragged into it. */
+:root[data-theme="dark"],
 :root.dark,
+html.dark,
+body.dark,
 [data-theme="dark"],
-.dark {
-  --hl-canvas: var(--hl-deep);
-  --hl-ink: var(--hl-surface);
+.dark-mode {
+  --hl-canvas: #0c281c;
+  --hl-ink: #fbfcec;
   --hl-ink-70: rgba(251, 252, 236, 0.8);
   --hl-ink-60: rgba(251, 252, 236, 0.66);
   --hl-ink-40: rgba(251, 252, 236, 0.46);
@@ -59,12 +69,37 @@
   --hl-rule-strong: rgba(251, 252, 236, 0.24);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not(.light) {
+    --hl-canvas: #0c281c;
+    --hl-ink: #fbfcec;
+    --hl-ink-70: rgba(251, 252, 236, 0.8);
+    --hl-ink-60: rgba(251, 252, 236, 0.66);
+    --hl-ink-40: rgba(251, 252, 236, 0.46);
+    --hl-rule: rgba(251, 252, 236, 0.12);
+    --hl-rule-md: rgba(251, 252, 236, 0.16);
+    --hl-rule-strong: rgba(251, 252, 236, 0.24);
+  }
+}
+
 /* ─── Page ─────────────────────────────────────────────────── */
 
 html,
 body {
   background-color: var(--hl-canvas);
   color: var(--hl-ink);
+}
+
+/* color-scheme keeps form controls, scrollbars and the overscroll gutter
+   on the same side as the palette above. */
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"],
+:root.dark,
+.dark-mode {
+  color-scheme: dark;
 }
 
 body {
