@@ -1,5 +1,5 @@
 {
-  "name": "Hotline UGC",
+  "name": "Hotline UGC Docs",
   "favicon": "https://www.hotlineugc.com/icon.svg",
   "colors": {
     "light": {
@@ -174,5 +174,7 @@
     ]
   },
   "logo-light": "https://blob-cdn.documentation.ai/org-859c275e-2758-4583-af3d-97149feeb0e4/doc-78c362c8-adbd-46bb-ae3e-5417c05d090a/1789954551174-pxunilofhk-hotline-wordmark-forest.svg?rasterize-bypass=true",
-  "logo-dark": "https://blob-cdn.documentation.ai/org-859c275e-2758-4583-af3d-97149feeb0e4/doc-78c362c8-adbd-46bb-ae3e-5417c05d090a/1789954565100-8st5pxtvu1x-hotline-wordmark-citron.svg?rasterize-bypass=true"
+  "logo-dark": "https://blob-cdn.documentation.ai/org-859c275e-2758-4583-af3d-97149feeb0e4/doc-78c362c8-adbd-46bb-ae3e-5417c05d090a/1789954565100-8st5pxtvu1x-hotline-wordmark-citron.svg?rasterize-bypass=true",
+  "description": "Documentation for Hotline UGC, the performance UGC platform for Meta ads. Setup, content review, publishing, royalties and payouts, for brands and creators.",
+  "title": "Hotline UGC Docs"
 }
