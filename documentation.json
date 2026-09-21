@@ -1,8 +1,6 @@
 {
   "name": "Hotline UGC",
-  "favicon": "/assets/icon.svg",
-  "logo-light": "/assets/logo-light.svg",
-  "logo-dark": "/assets/logo-dark.svg",
+  "favicon": "https://www.hotlineugc.com/icon.svg",
   "colors": {
     "light": {
       "brand": "#143d2b",
