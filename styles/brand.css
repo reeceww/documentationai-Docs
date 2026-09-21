@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap");
+
+/* ============================================================
+   Hotline UGC docs, Forest + Citron.
+
+   The palette and the two faces are the marketing site's, taken from
+   its `.theme-forest` block rather than sampled from a screenshot, so
+   the docs and hotlineugc.com read as one property.
+
+     forest  #143d2b   the ink, and the accent
+     citron  #dce962   the label on a forest field
+     surface #fbfcec   the page
+     deep    #0c281c   the darker green, for inverted panels
+     muted   #49604e   supporting copy
+
+   Contrast, as computed on the site:
+     forest on surface          11.7:1
+     citron on forest           10.1:1
+     forest at .68 on surface    4.5:1, passes AA for body text
+
+   One deliberate departure: the site sets letter-spacing -0.02em on
+   its headings and this does not. House rule is that type ships at
+   default tracking.
+   ============================================================ */
+
+:root {
+  --hl-forest: #143d2b;
+  --hl-citron: #dce962;
+  --hl-surface: #fbfcec;
+  --hl-deep: #0c281c;
+  --hl-muted: #49604e;
+  --hl-decorative: #d4dcc3;
+
+  --hl-canvas: var(--hl-surface);
+  --hl-ink: var(--hl-forest);
+  --hl-ink-70: rgba(20, 61, 43, 0.78);
+  --hl-ink-60: rgba(20, 61, 43, 0.68);
+  --hl-ink-40: rgba(20, 61, 43, 0.48);
+  --hl-rule: rgba(20, 61, 43, 0.09);
+  --hl-rule-md: rgba(20, 61, 43, 0.13);
+  --hl-rule-strong: rgba(20, 61, 43, 0.2);
+
+  --hl-sans: "Figtree", system-ui, -apple-system, sans-serif;
+  --hl-heading: "Manrope", system-ui, -apple-system, sans-serif;
+}
+
+/* The kit's reversed pairing: the deep green field carrying citron,
+   which is the same inversion the site uses for its one dark band. */
+:root.dark,
+[data-theme="dark"],
+.dark {
+  --hl-canvas: var(--hl-deep);
+  --hl-ink: var(--hl-surface);
+  --hl-ink-70: rgba(251, 252, 236, 0.8);
+  --hl-ink-60: rgba(251, 252, 236, 0.66);
+  --hl-ink-40: rgba(251, 252, 236, 0.46);
+  --hl-rule: rgba(251, 252, 236, 0.12);
+  --hl-rule-md: rgba(251, 252, 236, 0.16);
+  --hl-rule-strong: rgba(251, 252, 236, 0.24);
+}
+
+/* ─── Page ─────────────────────────────────────────────────── */
+
+html,
+body {
+  background-color: var(--hl-canvas);
+  color: var(--hl-ink);
+}
+
+body {
+  font-family: var(--hl-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Type ─────────────────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--hl-heading);
+  font-weight: 600;
+  color: var(--hl-ink);
+  line-height: 1.25;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+/* ─── Links ────────────────────────────────────────────────── */
+
+/* Forest sits close to body text, so prose links carry an underline
+   the way the site's article body does. Without it a link inside a
+   paragraph is only a shade away from the sentence around it.
+   Scoped to paragraphs, list items and table cells, so navigation,
+   cards and headings are left alone. */
+main p > a,
+main li > a,
+main td > a {
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.18em;
+}
+
+/* ─── Code ─────────────────────────────────────────────────── */
+
+/* Monospace stays monospace here, unlike on the marketing site, which
+   aliases its mono token to Figtree. That works there because its only
+   code is a short technical label; these pages carry real shell
+   commands and tables of scopes, which need the alignment. */
+
+:not(pre) > code {
+  background: color-mix(in srgb, var(--hl-ink) 6%, transparent);
+  border-radius: 4px;
+}
+
+pre {
+  border-radius: 12px;
+}
+
+/* ─── Rules ────────────────────────────────────────────────── */
+
+hr {
+  border-color: var(--hl-rule-md);
+}
+
+table th,
+table td {
+  border-color: var(--hl-rule);
+}

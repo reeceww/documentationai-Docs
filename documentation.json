@@ -1,13 +1,25 @@
 {
   "name": "Hotline UGC",
+  "favicon": "/assets/icon.svg",
+  "logo-light": "/assets/logo-light.svg",
+  "logo-dark": "/assets/logo-dark.svg",
   "colors": {
     "light": {
-      "brand": "#143d2b"
+      "brand": "#143d2b",
+      "heading": "#143d2b",
+      "text": "#143d2b"
     },
     "dark": {
-      "brand": "#7DCEAB"
+      "brand": "#dce962",
+      "heading": "#fbfcec",
+      "text": "#fbfcec"
     }
   },
+  "customCss": [
+    {
+      "src": "styles/brand.css"
+    }
+  ],
   "navigation": {
     "tabs": [
       {
