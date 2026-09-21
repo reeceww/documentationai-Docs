@@ -1,0 +1,41 @@
+---
+title: API Reference
+description: There is no public Hotline UGC API yet. What exists today, and what to use instead.
+---
+
+<Callout kind="warning">
+  **A public API is not available yet.** There are no API keys to issue, no documented endpoints, and no `api.hotlineugc.com`. Anything you may have seen describing one was placeholder content and has been removed.
+</Callout>
+
+## What this means today
+
+Everything in Hotline is done through the app at [app.hotlineugc.com](https://app.hotlineugc.com). There is no programmatic way to create work, read performance or trigger a payout from outside it.
+
+If you have built something against endpoints from an earlier version of these docs, it was never live and will not start working.
+
+## What does exist
+
+Two integration surfaces are real, and both are configured from **Settings** rather than called directly:
+
+<Columns cols={2}>
+  <Card title="Meta" icon="megaphone" href="/integrations#meta">
+    Hotline reads and writes your Meta ad account on your behalf, once you authorise it.
+  </Card>
+  <Card title="Shopify" icon="shopping-cart" href="/integrations#shopify">
+    Install the app on your store and Hotline mirrors your catalogue and creates gift orders.
+  </Card>
+</Columns>
+
+Hotline also receives webhooks from Shopify and Stripe. Those are inbound to Hotline and configured by the integrations themselves, so there is nothing for you to call or register.
+
+## If you need programmatic access
+
+Tell us what you are trying to automate. What gets built first will be decided by what people actually ask for, and a concrete use case is far more useful than a general request for an API.
+
+<Card title="Email us" icon="mail" href="mailto:hello@hotlineugc.com">
+  hello@hotlineugc.com
+</Card>
+
+<Callout kind="info">
+  This page will be replaced with real reference documentation if and when a public API ships. Until then, treat the absence of endpoints here as the accurate answer rather than a gap.
+</Callout>

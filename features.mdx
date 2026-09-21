@@ -1,138 +1,117 @@
 ---
 title: Core Features
-description: Detailed walkthrough of Hotline UGC's core capabilities for managing creators, campaigns, and performance tracking.
+description: What Hotline UGC does, surface by surface, from content review through to creator payouts.
 ---
 
 ## Overview
 
-Hotline UGC provides a comprehensive platform for briefing creators, managing video production, and tracking performance directly tied to Meta Ads revenue. You gain full visibility into ROAS, spend, and royalties, enabling data-driven decisions for your campaigns. Key capabilities include real-time dashboard analytics, streamlined creator workflows, video approval processes, and insights into top-performing creatives.
+Hotline covers the whole life of a creator video: it arrives, gets reviewed, becomes an ad, earns money, and pays somebody. Each stage has a place in the product.
 
 <Columns cols={3}>
-  <Card title="Dashboard Analytics" icon="bar-chart-3" href="#dashboard-analytics">
-    Monitor ROAS, spend, revenue, and royalties across all campaigns.
+  <Card title="Content review" icon="play-circle" href="#content-review">
+    Versioned submissions with notes pinned to the frame.
   </Card>
-  <Card title="Creator Management" icon="users" href="#creator-management">
-    Brief creators, track submissions, and handle payouts based on performance.
+  <Card title="Meta publishing" icon="send" href="#publishing-to-meta">
+    Approved videos into your own ad account as paused drafts.
   </Card>
-  <Card title="Video Workflows" icon="video" href="#video-workflows">
-    Approve, revise, and deploy videos to Meta Ads with revision tracking.
+  <Card title="Attribution" icon="bar-chart-3" href="#performance-and-attribution">
+    Spend and revenue against the individual video and creator.
+  </Card>
+  <Card title="Royalties" icon="percent" href="#royalties-and-payout-models">
+    Several payout models, per creator or per video.
+  </Card>
+  <Card title="Payouts" icon="dollar-sign" href="#payouts">
+    Pay runs through Stripe Connect, into accounts creators own.
+  </Card>
+  <Card title="Gifting" icon="gift" href="#gifting">
+    Send free product from your Shopify catalogue and track the parcel.
   </Card>
 </Columns>
 
+## Content review
+
+Creators upload into the Hub. Every upload is a version, including the first.
+
+**Notes are pinned to a timestamp** on the video, so feedback points at the frame it is about rather than describing it. When a creator answers a revision request, the new cut arrives as the next version. The previous file stays reachable, and unresolved notes are carried onto the new version with a pointer back to the frame they were drawn on.
+
 <Callout kind="info">
-  All metrics update in real-time as ad spend and revenue flow through your integrated accounts.
+  The drawing stays with the frame it was drawn on. Copying an annotation onto a different cut with its coordinates intact would leave the arrow pointing at something that moved, so only the note travels.
 </Callout>
 
-## Dashboard Analytics
+## Publishing to Meta
 
-Access a centralized dashboard showing key metrics like total spend tracked, revenue generated, ROAS, and royalties paid. Filter by time periods or campaigns to identify high-performers.
+An approved video goes to Meta with **Upload to Meta**. You choose the ad account and ad name, and where the ad should sit: duplicate an existing adset, drop it into an existing one, or build one from a saved template.
 
-<Tabs>
-  <Tab title="Last 30 Days" icon="calendar">
-    View aggregated data:
+Ads are created **paused**. Nothing spends until somebody turns it on in Meta.
 
-    | Metric              | Value     | Change |
-    |---------------------|-----------|--------|
-    | Total Spend         | A$84,120 | +18%  |
-    | Revenue Generated   | A$269,186| +24%  |
-    | ROAS                | 3.2x     | +15%  |
-    | Total Royalties     | A$9,417  | +31%  |
-  </Tab>
-  <Tab title="All Time" icon="clock">
-    Lifetime totals provide long-term trends for strategic planning.
-  </Tab>
-</Tabs>
+Bulk upload takes several approved creatives in one pass, which is the normal way to ship a batch of variants.
 
-Integrate webhooks to automatically track revenue from Meta Ads.
+## Performance and attribution
 
-<CodeGroup tabs="JavaScript,Python">
-  ```javascript
-  // Webhook handler for revenue events
-  app.post('/webhook/revenue', (req, res) => {
-    const { campaignId, revenue, adId } = req.body;
-    // Sync with Hotline UGC API
-    fetch('https://api.hotlineugc.com/v1/campaigns/' + campaignId + '/revenue', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer YOUR_API_KEY' },
-      body: JSON.stringify({ revenue, adId })
-    });
-    res.status(200).send('OK');
-  });
-  ```
-  ```python
-  # Webhook handler using Flask
-  from flask import Flask, request
-  import requests
+Meta sends spend, impressions, clicks, reach, video plays, purchases and purchase value back against each individual ad, every two hours. Because each ad is mapped to the video and the creator behind it, the numbers attach to a person rather than to a campaign.
 
-  app = Flask(__name__)
+A creative running as several ads can be read either way:
 
-  @app.route('/webhook/revenue', methods=['POST'])
-  def webhook():
-      data = request.json
-      campaign_id = data['campaignId']
-      revenue = data['revenue']
-      ad_id = data['adId']
-      # Sync with Hotline UGC
-      requests.post(
-          f'https://api.hotlineugc.com/v1/campaigns/{campaign_id}/revenue',
-          headers={'Authorization': 'Bearer YOUR_API_KEY'},
-          json={'revenue': revenue, 'ad_id': ad_id}
-      )
-      return 'OK', 200
-  ```
-</CodeGroup>
+- **Individual**, one card per ad
+- **Aggregated**, one card per video with a variant count and combined figures
 
-## Creator Briefing and Management
+Where Meta provides incremental attribution, iROAS uses it. Where it does not, the card shows an estimate and says so rather than presenting a modelled figure as measured.
 
-Brief creators directly in the platform with customizable templates for hooks, scripts, and deliverables.
-
-<Steps>
-  <Step title="Create Brief" icon="file-text">
-    Define campaign goals, target audience, and video specs (e.g., 15-30s hooks for Meta Ads).
-  </Step>
-  <Step title="Assign Creators" icon="user-plus">
-    Select from your roster or invite new ones. Set royalty rates based on expected ROAS.
-  </Step>
-  <Step title="Track Progress" icon="activity">
-    Monitor submissions and performance. Payouts auto-calculate on verified revenue.
-  </Step>
-</Steps>
-
-<Expandable title="Advanced Payout Rules" default-open="false">
-  Configure caps, minimum ROAS thresholds, and tiered royalties for optimal budget control.
-</Expandable>
-
-## Video Approval and Revision Workflows
-
-Manage the full lifecycle from submission to live ads. Request revisions with inline feedback.
-
-<Board title="Video Workflow Status">
-  <BoardColumn title="Briefed" color="0" icon="file">
-    <BoardCard title="Morning Routine Hook" author="Priya Raman" createdAt="2024-10-01" />
-  </BoardColumn>
-  <BoardColumn title="Submitted" color="1" icon="upload">
-    <BoardCard title="Gym Bag Staple" description="Awaiting hook review" author="Dana Whitlock" dueDate="2024-10-15" />
-  </BoardColumn>
-  <BoardColumn title="Approved & Live" color="2" icon="check-circle">
-    <BoardCard title="Faster Than Coffee" description="41 variants live" author="Tomas Berg" />
-  </BoardColumn>
-  <BoardColumn title="Paused" color="3" icon="pause-circle">
-    <BoardCard title="Breakfast Audit" description="Payout cap reached" author="Simone Achebe" />
-  </BoardColumn>
-</Board>
-
-## Top-Performing Creatives
-
-Review top videos by ROAS, CTR, hook rate, and purchases. Switch between aggregated and individual views.
-
-<Callout kind="tip">
-  Prioritize scaling creators with iROAS `{>2x}` and hook rates `{>30%}`.
+<Callout kind="warning">
+  Creators see impressions, clicks, CTR and earnings for their own videos only. Account wide spend, ROAS and other creators on the roster are never shown to them.
 </Callout>
 
-| Creative             | ROAS | Spend    | Revenue   | Hook Rate |
-|----------------------|------|----------|-----------|-----------|
-| Morning Routine Hook | 4.07x| A$11,842 | A$48,204 | 32.4%    |
-| Faster Than Coffee   | 3.40x| A$9,376  | A$31,880 | 28.1%    |
-| Gym Bag Staple       | 2.60x| A$4,630  | A$12,040 | 24.6%    |
+## Royalties and payout models
 
-Use these insights to duplicate high-performers and pause underperformers.
+Every creator has one base model, set per creator or inherited from the workspace default.
+
+| Model | How it prices a day |
+|---|---|
+| Percent of revenue | A share of the revenue that creator's ad brought in |
+| Flat fee per order | A fixed amount for every order the ad drove |
+| Meta performance | A rate against delivery, measured per 1,000 impressions, per click, or as a percent of ad spend |
+
+Meta performance pays on delivery rather than sales, so a creator earns from a video even when it sells nothing.
+
+Three things layer on top of whichever base is set:
+
+- **Submission fee**, paid once when a video is approved
+- **Retainer**, a guaranteed floor per period when a creator hits a volume goal, topping up the difference if royalties fall short
+- **Bonus**, paid straight away and outside the payout cap
+
+### Caps and freezing
+
+A **payout cap** is the most a single video can ever earn. It is shared across every ad running that video, so duplicating a creative into four adsets does not multiply what it can pay.
+
+Terms are **frozen onto a video when it is approved**. Editing a creator's terms later reprices new work and never touches work already approved, so nobody's agreed rate changes retroactively.
+
+## Payouts
+
+Earnings accrue nightly. A balance becomes available after the hold period, and then appears in **Payouts**.
+
+A pay run charges the brand the creators' royalties plus payment processing at cost, and pays each creator through **Stripe Connect** into an account the creator owns and onboarded to themselves. Hotline collects from the brand first and pays creators only once that settles, so it never fronts the money and never keeps any of it.
+
+Creators can also cash out themselves once they clear the minimum, and can turn on automatic cash outs at a threshold they choose.
+
+## Gifting
+
+With Shopify connected, creators request products from your real catalogue, or you send one directly without waiting to be asked.
+
+An approved request creates a **draft order at a 100% discount** in your store and completes it. Nothing is charged and no payment method is used. When you fulfil the order, tracking flows back and the shipment is tracked through to delivery inside Hotline.
+
+## Working surfaces
+
+<Columns cols={2}>
+  <Card title="Boards" icon="layout-grid">
+    Collect ads and creatives into boards, and share a board by link with people who have no account.
+  </Card>
+  <Card title="Pages" icon="file-text">
+    A block editor for briefs and documents, shareable with creators or by public link.
+  </Card>
+  <Card title="Messages" icon="message-square">
+    Threads with creators, with file, board and page attachments, and gift shipment cards inline.
+  </Card>
+  <Card title="Activity" icon="history">
+    A log of what happened in the workspace and who did it.
+  </Card>
+</Columns>

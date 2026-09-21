@@ -1,27 +1,50 @@
 ---
-title: Media Upload Fails
-description: Quickly fix failed media uploads in Hotline UGC.
+title: An upload fails
+description: Why a Hotline UGC upload stalls or is rejected, and how to fix it.
 ---
 
 ## Symptoms
 
-- Upload stalls or shows error message
-- File doesn't appear in your library
+- The upload stalls part way and does not finish
+- The file is rejected as soon as you choose it
+- The upload appears to complete but nothing shows in the Hub
 
-## Common causes
-- File exceeds 200MB
-- Unsupported format
-- Temporary connection issue
+## Check these first
 
-## Quick Fix
 <Steps>
-  <Step title="Check file type and size">
-    Ensure your file is .jpg, .png, .mp4, or .mov and under 200MB.
+  <Step title="File size" icon="scale">
+
+  The limit is **500 MB**. A long export at a high bitrate passes it easily.
+
+  Re-export at 1080p rather than 4K. Meta downscales ad creative anyway, so this costs nothing you will see in the ad.
+
   </Step>
-  <Step title="Retry with stable connection">
-    Try uploading again with a reliable internet connection.
+
+  <Step title="File format" icon="file-video">
+
+  Video must be `.mp4`, `.mov` or `.webm`. Images must be `.jpg`, `.png`, `.webp` or `.gif`.
+
+  A `.mov` exported from an iPhone is fine. A `.hevc` or `.avi` is not, and re-exporting as `.mp4` is the quickest fix.
+
   </Step>
-  <Step title="Clear browser cache">
-    Sometimes browser cache blocks uploads. Clear cache and retry.
+
+  <Step title="Connection" icon="wifi">
+
+  A large file on an unstable connection can stall near the end. If the progress bar reaches high nineties and stops, retry on a different network before assuming the file is at fault.
+
   </Step>
 </Steps>
+
+## Still failing
+
+<Callout kind="info">
+  Email [hello@hotlineugc.com](mailto:hello@hotlineugc.com) with the file name, its size, and roughly when you tried. That is enough to find the attempt in the logs and tell you what actually stopped it.
+</Callout>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="How do I upload content?" icon="upload" href="/help-center/faq/how-to-upload-ugc" horizontal>
+    Where to upload and what happens next.
+  </Card>
+</Columns>

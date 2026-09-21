@@ -1,116 +1,90 @@
 ---
 title: Changelog
-description: Version history, recent updates, and changes to Hotline UGC platform.
+description: What has changed in Hotline UGC, newest first.
 ---
 
-## Recent Updates
+Changes that affect what you see and do in the product. Dates are when the change reached production.
 
-Stay informed about the latest improvements to Hotline UGC. You receive notifications for major releases directly in your dashboard under Settings > Updates.
+<Update label="2026-09-18" description="Messages" tags={["feature"]}>
+
+## Links in messages are clickable
+
+A URL pasted into a thread is now a link. Links to Hotline open in place; anything else opens in a new tab.
+
+Only `http` and `https` links are made clickable. Anything else stays as plain text, because a link in a message was written by the other person in the conversation.
+
+</Update>
+
+<Update label="2026-09-17" description="Creator pages and payout terms" tags={["feature", "bugfix"]}>
+
+## A creator's page shows the same cards as everywhere else
+
+Content Performance on a creator's page now uses the same creative cards as the dashboard and analytics: the video itself, its ad status, the payout cap bar and its metrics, instead of an icon and four numbers.
+
+It also gained the **Aggregated / Individual** toggle. A video running as several ads can be read as one card per ad, or folded into one card with a variant count.
+
+## Every card states the video's payout terms
+
+Cards now say what the creative actually earns on, for example "3.5% of revenue, uncapped" or "15% of revenue, up to A$600.00". Terms are frozen per video at approval, so two videos by the same creator can differ and each card reads its own.
+
+## Fixed: a video's earnings multiplied by its ad count
+
+Aggregating a video that ran as several ads summed a per-video figure once per ad, so a video capped at A$500 could read A$2,000. Each card now reports what its own ad earned, and the aggregated card reports the video's real total.
+
+## Uploads and revisions now email the brand
+
+A creator uploading, or answering a revision request, now emails the brand team as well as raising an in-app notification. A resubmission previously announced nothing at all.
+
+## Meta ad statuses read like English
+
+Status pills said "Campaign\_paused" and "Adset\_paused". They now read "Campaign paused" and "Ad set paused".
+
+</Update>
+
+<Update label="2026-09-14" description="Messages" tags={["feature"]}>
+
+## Edit a message for two minutes
+
+You can correct your own message for two minutes after sending it. Pressing the up arrow in an empty composer opens the last message you can still edit.
+
+Edited messages are marked, because both sides of a conversation need to be able to see that the text changed.
+
+## Board and page links become attachments
+
+Pasting a link to a board or a hub page into a message now sends the same card the attach button produces, rather than a bare link.
+
+</Update>
+
+<Update label="2026-09-13" description="Shopify and email" tags={["feature", "improvement"]}>
+
+## Shopify App Store install flow
+
+Hotline now uses Shopify managed installation. Installing from the App Store starts on a Shopify surface, and linking a store to a workspace no longer asks anyone to type a shop domain.
+
+Subscriptions for merchants who install from the App Store are billed through Shopify App Pricing.
+
+## Every email rebuilt
+
+All transactional email moved onto one shared template, with legal footer lines and a one click unsubscribe header. Email now sends from `hello@hotlineugc.com`, so replies reach a person.
+
+</Update>
+
+<Update label="2026-09-10" description="Security and reliability" tags={["improvement", "bugfix"]}>
+
+## Errors stop leaking upstream detail
+
+Database and third party SDK errors no longer reach customer facing screens with their internals attached.
+
+## Attachments are scoped to your workspace
+
+Board and hub page attachments in messages are now checked against the sender's own workspace.
+
+## Content Security Policy
+
+A Content Security Policy now ships on every page.
+
+</Update>
 
 <Callout kind="info">
-  Check the [Hotline UGC dashboard](https://dashboard.example.com/settings/updates) for release notes tailored to your account.
-</Callout>
-
-<Update label="2024-12-05" description="v1.3.0" tags={["feature", "improvement"]}>
-
-## New Features
-
-- Added real-time ROAS tracking for live ads, showing iROAS updates every 5 minutes.
-- Introduced payout caps per creative, helping you control royalties based on performance thresholds.
-- New analytics filters for top-performing creators by hook rate, CTR, and NC CPA.
-
-## Improvements
-
-- Enhanced Meta Ads integration for faster video uploads and variant management.
-- Dashboard now supports aggregated and individual creative views with customizable metrics.
-
-## Bug Fixes
-
-- Fixed spend tracking discrepancies in multi-currency accounts (A$, USD).
-- Resolved payout calculation errors when ads transition from Live to Paused status.
-
-</Update>
-
-<Update label="2024-11-20" description="v1.2.0" tags={["feature", "bugfix"]}>
-
-## New Features
-
-- Creator briefing workflow with templates for hooks, routines, and product audits.
-- Integrated Stripe for automated royalty payouts based on conversion value.
-- Top Performing Creatives board with performance heatmaps (ROAS, hook rate).
-
-## Bug Fixes
-
-- Corrected NC CPA calculations for videos with low purchase volumes.
-- Fixed dashboard refresh issues during high-volume ad tracking.
-
-## Improvements
-
-- Optimized analytics load times by 40% for accounts with 50+ active ads.
-
-</Update>
-
-<Update label="2024-10-15" description="v1.1.0" tags={["feature", "breaking"]}>
-
-## New Features
-
-- Full Meta Ads pipeline: brief creators, ship videos, track spend/revenue.
-- Royalties dashboard showing total generated vs. paid, with creator breakdowns.
-- Shopify integration for direct product feeds in briefs.
-
-## Breaking Changes
-
-- Updated API endpoints for ad metrics; migrate to `/v2/metrics` for ROAS data.
-- Payout logic now requires explicit cap settings (defaults to uncapped).
-
-## Bug Fixes
-
-- Patched webhook failures for Klaviyo event syncing.
-
-</Update>
-
-## Upcoming Roadmap
-
-Track upcoming features and improvements in our public roadmap.
-
-<Board title="Q1 2025 Roadmap">
-  <BoardColumn title="Planned" color="0" icon="calendar">
-    <BoardCard title="Klaviyo Automation" description="Auto-trigger briefs from email campaigns" icon="mail" dueDate="2025-02-15" />
-    <BoardCard title="Creator Marketplace" description="Discover vetted UGC creators" icon="users" />
-  </BoardColumn>
-  <BoardColumn title="In Progress" color="1" icon="loader-2">
-    <BoardCard title="Advanced Analytics" description="Predictive ROAS modeling" icon="trending-up" author="Engineering" />
-  </BoardColumn>
-  <BoardColumn title="Completed" color="2" icon="check-circle">
-    <BoardCard title="Stripe Payouts v2" description="Batch processing support" createdAt="2024-12-05" />
-  </BoardColumn>
-</Board>
-
-## Stay Updated
-
-Follow these steps to ensure you always have the latest version.
-
-<Steps>
-  <Step title="Enable Notifications" icon="bell">
-    In your dashboard, go to Settings > Notifications and toggle "Release Notes".
-  </Step>
-  <Step title="Check for Updates" icon="refresh-cw">
-    Visit Analytics > Overview weekly to review new metrics.
-  </Step>
-  <Step title="Join Beta" icon="zap">
-    Sign up for early access at `/beta` to test features first.
-  </Step>
-</Steps>
-
-<Columns cols={2}>
-  <Card title="Quickstart" icon="book-open" href="/quickstart">
-    Get started with your first UGC campaign.
-  </Card>
-  <Card title="API Reference" icon="code" href="/authentication">
-    Integrate programmatically with our APIs.
-  </Card>
-</Columns>
-
-<Callout kind="tip">
-  Have feedback? Share it via the dashboard or join our community forum.
+  Entries here cover changes you can see in the product. Internal work, refactors and infrastructure are left out.
 </Callout>
