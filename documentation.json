@@ -60,6 +60,16 @@
                 "icon": "layout-grid"
               },
               {
+                "title": "Briefs",
+                "path": "briefs",
+                "icon": "file-text"
+              },
+              {
+                "title": "Creative Intelligence",
+                "path": "intelligence",
+                "icon": "sparkles"
+              },
+              {
                 "title": "Royalties and Payouts",
                 "path": "royalties-and-payouts",
                 "icon": "percent"
@@ -113,6 +123,21 @@
             "title": "Overview",
             "path": "api-reference/overview",
             "icon": "info"
+          },
+          {
+            "title": "Authentication",
+            "path": "api-reference/authentication",
+            "icon": "key"
+          },
+          {
+            "title": "Endpoints",
+            "path": "api-reference/endpoints",
+            "icon": "list"
+          },
+          {
+            "title": "MCP Server",
+            "path": "api-reference/mcp",
+            "icon": "plug"
           }
         ]
       },

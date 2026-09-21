@@ -1,0 +1,86 @@
+---
+title: MCP server
+description: Connect an AI assistant to your workspace, what the eight tools can read, and how to switch access off.
+---
+
+## What it is
+
+An MCP server that lets an AI assistant read your workspace: your creatives, their performance, your roster and what has accrued.
+
+```
+https://app.hotlineugc.com/mcp
+```
+
+It is on **Growth and Agency**, the same as the API.
+
+<Callout kind="info">
+  The server is read-only. An assistant can tell you which hook is working and what a creator is owed. It cannot approve a video, publish an ad or move money.
+</Callout>
+
+## Connecting
+
+Add it as a connector in your assistant and sign in with your Hotline account. There is no key to paste and nothing to copy.
+
+Signing in is the whole authorisation step: the connection carries **your** identity and your real role, so it reaches exactly the workspaces you belong to and nothing else.
+
+<Callout kind="alert">
+  One connection per person. Each colleague adds the connector themselves and signs in as themselves. Somebody with no Hotline account cannot use the MCP server, and there is no shared credential to hand around.
+</Callout>
+
+### Verified clients
+
+**Claude**, via the claude.ai connector, is exercised against live production data.
+
+Other MCP clients speak the same protocol and may well work, but we only name what we have actually tested.
+
+## API keys are refused here
+
+The MCP server does not accept `hl_live_` API keys, and answers one with what to do instead rather than a bare 401.
+
+A key is a bearer string; a person is not. MCP is the human surface, and the sign-in is what ties a connection to a seat. Use a key for [the REST API](/api-reference/authentication), which is built for scripts.
+
+## The eight tools
+
+| Tool | What it reads |
+|---|---|
+| `list_workspaces` | Every workspace the connection reaches. Call this first, the rest need a workspace id |
+| `get_brand_context` | Currency, ad account timezone, plan, connection freshness, default payout terms, and the definition of every metric |
+| `list_creators` | The roster. Names, ids and tags only |
+| `search_content` | Submissions, filtered and searched |
+| `get_content_analysis` | What the creative intelligence pass found on one version |
+| `get_creative_performance` | Spend, delivery and revenue per creative |
+| `get_creator_performance` | The same, grouped by creator |
+| `get_royalty_summary` | What has accrued, and against which terms |
+
+<Callout kind="info">
+  `list_creators` returns names, ids and tags. It never returns contact or payment details, no matter how the question is phrased.
+</Callout>
+
+`get_brand_context` is worth calling before anything numeric. It carries the workspace's currency, its ad account timezone and the definition of each metric, which is what stops an assistant comparing two figures that were never in the same units.
+
+## Creators cannot use it yet
+
+The tools are brand side. A creator's own workspace still appears in `list_workspaces`, because hiding it would read as the workspace having vanished, but the row says plainly that creator accounts cannot use the server yet rather than leaving a client to discover it over seven failing calls.
+
+A creator-facing MCP is a real future feature. It needs its own service layer that filters to their own rows, not a lowered permission floor, because dropping the floor would expose other creators' deals and the whole royalty ledger.
+
+## Turning it off
+
+**Settings**, then **Integrations**, on the MCP card. The switch stops every connection to the workspace at once, whoever made it.
+
+It exists because a connection is otherwise invisible to you: a team member can connect their own assistant account and read workspace data, and the grant lives with the identity provider rather than with us. The card shows the resulting activity, so you can see what has been reading and when.
+
+<Callout kind="alert">
+  The switch is deliberately not plan-gated. A workspace that downgraded, or whose payment failed, can still turn access off. Putting a safety control behind a subscription would turn a billing problem into a security one.
+</Callout>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="API overview" icon="code" href="/api-reference/overview" horizontal>
+    The same services over REST.
+  </Card>
+  <Card title="Creative Intelligence" icon="sparkles" href="/intelligence" horizontal>
+    What `get_content_analysis` is reading.
+  </Card>
+</Columns>

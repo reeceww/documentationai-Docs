@@ -1,0 +1,148 @@
+---
+title: Endpoints
+description: All nine Hotline UGC API endpoints, their parameters and what each returns.
+---
+
+Every endpoint is a `GET` and every one is under:
+
+```
+https://app.hotlineugc.com/api/v1
+```
+
+Paginated endpoints take `limit`, 1 to 100, defaulting to 25, and `offset`, defaulting to 0. They answer with a `pagination` object carrying `has_more`.
+
+## Workspaces
+
+### List workspaces
+
+```
+GET /workspaces
+```
+
+The workspaces your credential reaches, with your role in each. This is where you get the `workspaceId` the other eight endpoints need.
+
+No parameters.
+
+## Brand context
+
+### Get brand context
+
+```
+GET /workspaces/{workspaceId}/context
+```
+
+The workspace's own description of itself: who the brand is, what it sells, how it talks. Meant for grounding a model before it writes anything.
+
+No parameters.
+
+## Creators
+
+### List creators
+
+```
+GET /workspaces/{workspaceId}/creators
+```
+
+Your roster, with each creator's terms.
+
+| Parameter | Type | Notes |
+|---|---|---|
+| `q` | string | Free text search, up to 200 characters |
+| `tag` | string | Filter to one tag |
+| `limit`, `offset` | integer | Pagination |
+
+## Content
+
+### List content
+
+```
+GET /workspaces/{workspaceId}/content
+```
+
+| Parameter | Type | Notes |
+|---|---|---|
+| `q` | string | Free text search, up to 200 characters |
+| `status` | enum | `pending`, `in_review`, `approved`, `rejected`, `revision_requested` |
+| `creator_id` | uuid | One creator's submissions |
+| `file_type` | enum | `video`, `image`, `document` |
+| `has_analysis` | boolean | `true` or `false`, for creatives that have been analysed |
+| `limit`, `offset` | integer | Pagination |
+
+### Get one creative
+
+```
+GET /workspaces/{workspaceId}/content/{contentId}
+```
+
+One creative in detail, including its versions.
+
+## Analysis
+
+### Get a version's analysis
+
+```
+GET /workspaces/{workspaceId}/analysis/{versionId}
+```
+
+What the creative intelligence pass found on one version: the hook, the angle, the format, the voice, and the reasoning behind each.
+
+Analysis is on Growth and Agency, like the API itself. See [Creative Intelligence](/intelligence).
+
+## Performance
+
+### Read performance
+
+```
+GET /workspaces/{workspaceId}/performance
+```
+
+Spend, delivery and revenue, attributed to the creative and the creator behind each ad.
+
+| Parameter | Type | Notes |
+|---|---|---|
+| `by` | enum | `creative`, the default, or `creator` |
+| `group_by` | enum | `content` folds a creative's ads together, `mapping` keeps one row per ad |
+| `from`, `to` | string | A date range |
+| `days` | string | A trailing window, as an alternative to `from` and `to` |
+| `creator_id` | uuid | One creator |
+| `file_type` | enum | `video` or `image` |
+
+<Callout kind="alert">
+  Where Meta did not model incremental attribution, incremental figures come back as `null` with a reason of `not_modelled_by_meta` rather than as a zero. A zero and an absence are indistinguishable in what Meta returns, so the API withholds the number instead of inventing one. The dashboard shows an estimate and labels it as one.
+</Callout>
+
+## Royalties
+
+### Read royalties
+
+```
+GET /workspaces/{workspaceId}/royalties
+```
+
+What has accrued, and against which terms.
+
+| Parameter | Type | Notes |
+|---|---|---|
+| `creator_id` | uuid | One creator |
+| `from`, `to` | string | `YYYY-MM-DD` |
+
+## Jobs
+
+### Get a job
+
+```
+GET /workspaces/{workspaceId}/jobs/{jobId}
+```
+
+The state of a background job, for work that does not finish inside a request.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication" horizontal>
+    Getting a key and what it can reach.
+  </Card>
+  <Card title="MCP server" icon="plug" href="/api-reference/mcp" horizontal>
+    The same services, as tools for an assistant.
+  </Card>
+</Columns>

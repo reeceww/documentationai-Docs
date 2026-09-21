@@ -1,0 +1,85 @@
+---
+title: Creative Intelligence
+description: What your best performing creative has in common, read from the ads that actually ran.
+---
+
+## What it does
+
+Hotline watches every creative in your library, classifies what it is made of, and compares those attributes against what the ads actually did.
+
+The question it answers is not "which video won". You already know that. It is "what did the winners have in common", which is the only part that tells you what to brief next.
+
+Intelligence lives in **Hub**, then **Intelligence**. It is brand side, on **Growth and Agency**.
+
+## What gets classified
+
+Every analysed creative is tagged on four dimensions:
+
+| Dimension | What it captures |
+|---|---|
+| Hook | How the first seconds get attention |
+| Angle | The argument the video is making |
+| Format | How it is shot and assembled |
+| Voice | Who it sounds like it is coming from |
+
+Tags land on the creative itself, prefixed so they are identifiable. A re-analysis replaces its own previous answer and never touches a tag a person typed by hand.
+
+## Reading the page
+
+### Coverage
+
+The first thing on the page is how much of your library has been analysed, plus anything in progress, paused or failed.
+
+<Callout kind="info">
+  Coverage is there to be read before the conclusions below it. "Your best hook is a question" means something very different coming from nine of forty videos than from thirty eight of forty.
+</Callout>
+
+### What is working
+
+Each attribute value, ranked, with the evidence attached: how many creatives it rests on and how much spend sits behind it.
+
+The count is deliberately as prominent as the result. A brand with twenty videos spread across six hooks has three per hook, and a bare multiple next to one of them would be a confident claim about three videos.
+
+### Top creatives
+
+The individual creatives, best first, each showing what it was made of. The attributes sit beside the numbers on purpose: the ranking tells you where to put more spend, and the attributes are what let you brief the next one.
+
+## How analysis happens
+
+Analysis runs in the background. The library analyses itself and the page never asks you to pick a video.
+
+That is not only convenience. A page that averaged over whichever videos somebody had been curious enough to click would be drawing conclusions from the least random sample available.
+
+A sweep runs hourly for anything new, and a failed analysis can be retried rather than waiting a day.
+
+## Monthly allowance
+
+| Plan | Analyses per month |
+|---|---|
+| Starter | Not included |
+| Growth | 300 |
+| Agency | 1,000 |
+
+## Reading it elsewhere
+
+The same analysis is available outside the app:
+
+<Columns cols={2}>
+  <Card title="API" icon="code" href="/api-reference/endpoints#analysis" horizontal>
+    `GET /analysis/{versionId}` for one version's result.
+  </Card>
+  <Card title="MCP" icon="plug" href="/api-reference/mcp" horizontal>
+    `get_content_analysis`, for asking an assistant about it.
+  </Card>
+</Columns>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="The Hub" icon="layout-grid" href="/hub" horizontal>
+    Where Intelligence sits alongside the rest of the work.
+  </Card>
+  <Card title="Plans and limits" icon="credit-card" href="/plans" horizontal>
+    What each tier includes.
+  </Card>
+</Columns>

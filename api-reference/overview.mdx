@@ -1,41 +1,104 @@
 ---
-title: API Reference
-description: There is no public Hotline UGC API yet. What exists today, and what to use instead.
+title: API overview
+description: The Hotline UGC REST API: what it covers, how requests are shaped, and what it deliberately does not do.
 ---
 
-<Callout kind="alert">
-  **A public API is not available yet.** There are no API keys to issue, no documented endpoints, and no `api.hotlineugc.com`. Anything you may have seen describing one was placeholder content and has been removed.
-</Callout>
+## What it is
 
-## What this means today
+A read-only REST API over your workspace. Nine endpoints, all `GET`, served from the app itself rather than a separate host:
 
-Everything in Hotline is done through the app at [app.hotlineugc.com](https://app.hotlineugc.com). There is no programmatic way to create work, read performance or trigger a payout from outside it.
+```
+https://app.hotlineugc.com/api/v1
+```
 
-If you have built something against endpoints from an earlier version of these docs, it was never live and will not start working.
-
-## What does exist
-
-Two integration surfaces are real, and both are configured from **Settings** rather than called directly:
-
-<Columns cols={2}>
-  <Card title="Meta" icon="megaphone" href="/integrations#meta">
-    Hotline reads and writes your Meta ad account on your behalf, once you authorise it.
-  </Card>
-  <Card title="Shopify" icon="shopping-cart" href="/integrations#shopify">
-    Install the app on your store and Hotline mirrors your catalogue and creates gift orders.
-  </Card>
-</Columns>
-
-Hotline also receives webhooks from Shopify and Stripe. Those are inbound to Hotline and configured by the integrations themselves, so there is nothing for you to call or register.
-
-## If you need programmatic access
-
-Tell us what you are trying to automate. What gets built first will be decided by what people actually ask for, and a concrete use case is far more useful than a general request for an API.
-
-<Card title="Email us" icon="mail" href="mailto:hello@hotlineugc.com">
-  hello@hotlineugc.com
-</Card>
+There is no `api.hotlineugc.com`. If you have an older note pointing at one, it was never real.
 
 <Callout kind="info">
-  This page will be replaced with real reference documentation if and when a public API ships. Until then, treat the absence of endpoints here as the accurate answer rather than a gap.
+  The API and the [MCP server](/api-reference/mcp) are two doors onto the same services. Anything one can read, the other can. Pick the API for scripts and pipelines, and MCP for an assistant.
 </Callout>
+
+## What it covers
+
+| Area | What you can read |
+|---|---|
+| Workspaces | The workspaces your credential reaches, and your role in each |
+| Brand context | The workspace's own description of itself, for grounding a model |
+| Creators | Your roster and their terms |
+| Content | Submissions, their status, and a single creative in detail |
+| Analysis | What the creative intelligence pass found on one version |
+| Performance | Spend, delivery and revenue per creative |
+| Royalties | What has accrued, and against which terms |
+| Jobs | The state of a background job |
+
+## What it does not do
+
+**Nothing writes.** Every endpoint is a `GET`. You cannot approve a video, publish an ad, start a pay run or change terms through the API. Money and publishing stay in the app on purpose.
+
+**It is brand side only.** Creator accounts are refused. The data model exists to serve creators too, and a creator-facing surface is a real future feature, but lowering the role floor on the endpoints that exist would hand a creator other creators' deals and the whole royalty ledger.
+
+**There are no webhooks yet.** Hotline receives them from Shopify and Stripe; it does not send them.
+
+## Request shape
+
+Every request carries a bearer token. See [Authentication](/api-reference/authentication).
+
+```bash
+curl https://app.hotlineugc.com/api/v1/workspaces \
+  -H "Authorization: Bearer hl_live_..."
+```
+
+List endpoints take `limit` and `offset`, and answer with `has_more` so you know whether to ask again.
+
+```bash
+curl "https://app.hotlineugc.com/api/v1/workspaces/$WORKSPACE/content?limit=50&offset=0" \
+  -H "Authorization: Bearer hl_live_..."
+```
+
+## Errors
+
+Every failure returns the same JSON envelope, never an HTML error page.
+
+```json
+{
+  "error": {
+    "code": "plan_required",
+    "message": "The Hotline API is on Growth and Agency.",
+    "request_id": "req_..."
+  }
+}
+```
+
+Branch on `code`, which is stable. The `message` is for a human reading a log, and `request_id` is what to quote if you contact us. It is also returned on success, as the `X-Request-Id` header.
+
+| Code | Status | Meaning |
+|---|---|---|
+| `invalid_request` | 400 | The parameters did not validate |
+| `unauthorized` | 401 | No credential, or one that is not recognised |
+| `plan_required` | 402 | The credential is valid, the plan does not carry the API |
+| `forbidden` | 403 | Valid credential, insufficient access to this workspace |
+| `not_found` | 404 | No such record, or none your credential can see |
+| `conflict` | 409 | The request contradicts the current state |
+| `rate_limited` | 429 | More than 120 requests in a minute |
+| `internal` | 500 | Our fault. Quote the `request_id` |
+
+<Callout kind="info">
+  402 rather than 403 for a plan problem is deliberate. It lets a consumer tell an upgrade from a permission problem without reading prose.
+</Callout>
+
+## Rate limit
+
+120 requests per minute. Exceeding it returns `rate_limited` rather than dropping the connection.
+
+## Where to go next
+
+<Columns cols={3}>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Creating a key, what it can reach, and how it is bound to a seat.
+  </Card>
+  <Card title="Endpoints" icon="list" href="/api-reference/endpoints">
+    All nine, with their parameters.
+  </Card>
+  <Card title="MCP server" icon="plug" href="/api-reference/mcp">
+    The same data, connected to an assistant.
+  </Card>
+</Columns>

@@ -1,0 +1,67 @@
+---
+title: Authentication
+description: Creating an API key, what it can reach, and why it stops working when its creator leaves.
+---
+
+## Plan requirement
+
+The API is on **Growth and Agency**. Starter does not carry it, and neither does a workspace whose subscription has lapsed.
+
+Those are two different refusals and they return different reasons, so a lapsed Agency workspace is told to settle the bill rather than to upgrade to a tier it already has.
+
+<Card title="Plans and limits" icon="credit-card" href="/plans" horizontal>
+  What each tier includes.
+</Card>
+
+## Creating a key
+
+Keys live in **Settings**, then **Integrations**, on the API keys card. Only owners and admins see it.
+
+<Steps>
+  <Step title="Create the key" icon="key">
+    Give it a name you will recognise in a list six months from now.
+  </Step>
+  <Step title="Copy it once" icon="copy">
+    The full key is shown once, at creation. Only a prefix is stored in a readable form, so a lost key is replaced rather than recovered.
+  </Step>
+  <Step title="Send it as a bearer token" icon="terminal">
+    `Authorization: Bearer hl_live_...`
+  </Step>
+</Steps>
+
+Keys are stored as a SHA-256 hash. Nobody at Hotline can read yours back to you.
+
+## What a key can reach
+
+A key is scoped to the workspace it was created in, and acts at the **member** level no matter how senior the person who created it.
+
+That ceiling is deliberate. A leaked key created by an owner must not be able to manage billing, change royalty terms or mint more keys. Nothing above member is exposed to a key at all.
+
+<Callout kind="alert">
+  A key is bound to its creator's seat. If that person leaves the workspace, is removed, or has their account deleted, the key stops working. Rotate keys when someone leaves rather than assuming their automation survives them.
+</Callout>
+
+That binding closes a real hole. Before it, an admin on a one-seat plan could create a key, pass it to five colleagues with no Hotline accounts, and all five could read the whole workspace while the plan counted one seat. A key now carries exactly one person's access and cannot outlive their membership.
+
+## Keys do not work on the MCP server
+
+The [MCP server](/api-reference/mcp) refuses API keys and takes a sign-in instead. It answers a `hl_live_` bearer with what to do instead, rather than a bare 401, so anyone following an older note gets the specific fix.
+
+The reasoning: MCP is the human surface, one connection per person. A key is a string, and a string is not a person.
+
+## Revoking
+
+Delete a key from the same card. Revocation takes effect immediately.
+
+Every key's creation, use and deletion is written to the workspace activity log, so there is a record of what was reaching your data and when.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Endpoints" icon="list" href="/api-reference/endpoints" horizontal>
+    What you can call once you have a key.
+  </Card>
+  <Card title="Settings" icon="settings" href="/settings#integrations" horizontal>
+    Where the card lives.
+  </Card>
+</Columns>
