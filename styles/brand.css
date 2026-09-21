@@ -5,12 +5,12 @@
 
    The palette and the two faces are the marketing site's, taken from
    its `.theme-forest` block rather than sampled from a screenshot, so
-   the docs and hotlineugc.com read as one property.
+   the docs and hotlineugc.com cannot drift apart.
 
      forest  #143d2b   the ink, and the accent
      citron  #dce962   the label on a forest field
      surface #fbfcec   the page
-     deep    #0c281c   the darker green, for inverted panels
+     deep    #0c281c   the darker green, for the dark theme's field
      muted   #49604e   supporting copy
 
    Contrast, as computed on the site:
@@ -18,96 +18,169 @@
      citron on forest           10.1:1
      forest at .68 on surface    4.5:1, passes AA for body text
 
-   One deliberate departure: the site sets letter-spacing -0.02em on
-   its headings and this does not. House rule is that type ships at
+   This re-points the THEME's own variables rather than styling its
+   elements. The names below were read off the deployed site, where
+   every surface resolves through `--background`, `--card`, `--border`
+   and the sidebar group, so one declaration re-skins the navbar, the
+   sidebar, cards, tables and popovers together. Styling the elements
+   instead would mean matching class names that are not ours, and
+   missing whichever ones we had not seen.
+
+   The theme's dark switch is a class on <html>, verified live, and the
+   `[data-theme]` and prefers-color-scheme variants below are there in
+   case that changes. A selector that never matches costs nothing.
+
+   Deliberately left alone: the note, alert, success and error colours,
+   which carry meaning rather than brand. Turning them green would take
+   a warning callout and a success callout and make them the same
+   thing. `--font-mono` is left alone too, because these pages carry
+   shell commands and scope tables that need the alignment.
+
+   One departure from the site: it sets letter-spacing -0.02em on
+   headings and this does not, per the house rule that type ships at
    default tracking.
    ============================================================ */
 
-:root {
+:root,
+:root.light,
+:root[data-theme="light"] {
   --hl-forest: #143d2b;
   --hl-citron: #dce962;
   --hl-surface: #fbfcec;
   --hl-deep: #0c281c;
   --hl-muted: #49604e;
-  --hl-decorative: #d4dcc3;
-
-  --hl-canvas: var(--hl-surface);
-  --hl-ink: var(--hl-forest);
-  --hl-ink-70: rgba(20, 61, 43, 0.78);
-  --hl-ink-60: rgba(20, 61, 43, 0.68);
-  --hl-ink-40: rgba(20, 61, 43, 0.48);
-  --hl-rule: rgba(20, 61, 43, 0.09);
-  --hl-rule-md: rgba(20, 61, 43, 0.13);
-  --hl-rule-strong: rgba(20, 61, 43, 0.2);
 
   --hl-sans: "Figtree", system-ui, -apple-system, sans-serif;
   --hl-heading: "Manrope", system-ui, -apple-system, sans-serif;
-}
 
-/* The kit's reversed pairing: the deep green field carrying citron,
-   which is the same inversion the site uses for its one dark band.
-   
-   Declared once and referenced from several selectors, because the
-   theme's dark switch is not ours: it may be a class, a data attribute
-   or the OS preference. Whichever one fires, it lands on the same
-   values, and a selector that never matches costs nothing. The media
-   query is guarded so an explicitly light page on a dark OS is not
-   dragged into it. */
-:root[data-theme="dark"],
-:root.dark,
-html.dark,
-body.dark,
-[data-theme="dark"],
-.dark-mode {
-  --hl-canvas: #0c281c;
-  --hl-ink: #fbfcec;
-  --hl-ink-70: rgba(251, 252, 236, 0.8);
-  --hl-ink-60: rgba(251, 252, 236, 0.66);
-  --hl-ink-40: rgba(251, 252, 236, 0.46);
-  --hl-rule: rgba(251, 252, 236, 0.12);
-  --hl-rule-md: rgba(251, 252, 236, 0.16);
-  --hl-rule-strong: rgba(251, 252, 236, 0.24);
-}
+  /* Surfaces. Flat, like the site: one field, hairlines for structure. */
+  --background: #fbfcec;
+  --content-bg: #fbfcec;
+  --navbar-bg: #fbfcec;
+  --card: #fbfcec;
+  --popover: #fbfcec;
+  --primary: #fbfcec;
+  --sidebar: #fbfcec;
+  --sidebar-bg: #fbfcec;
+  --sidebar-primary: #fbfcec;
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not(.light) {
-    --hl-canvas: #0c281c;
-    --hl-ink: #fbfcec;
-    --hl-ink-70: rgba(251, 252, 236, 0.8);
-    --hl-ink-60: rgba(251, 252, 236, 0.66);
-    --hl-ink-40: rgba(251, 252, 236, 0.46);
-    --hl-rule: rgba(251, 252, 236, 0.12);
-    --hl-rule-md: rgba(251, 252, 236, 0.16);
-    --hl-rule-strong: rgba(251, 252, 236, 0.24);
-  }
-}
+  /* Text. `--body`, `--heading` and `--brand` also come from
+     documentation.json; repeated here so the file reads as one palette
+     rather than half a palette. */
+  --body: #143d2b;
+  --foreground: #143d2b;
+  --heading: #143d2b;
+  --link: #143d2b;
+  --sub-text: #49604e;
+  --toc-text: #49604e;
+  --toc-active-text: #143d2b;
+  --sidebar-foreground: rgba(20, 61, 43, 0.68);
+  --sidebar-accent-foreground: #143d2b;
+  --sidebar-primary-foreground: #143d2b;
 
-/* ─── Page ─────────────────────────────────────────────────── */
+  /* The kit's primary button is a forest field with a citron label. */
+  --brand: #143d2b;
+  --brand-text: #dce962;
 
-html,
-body {
-  background-color: var(--hl-canvas);
-  color: var(--hl-ink);
-}
+  /* Hairlines, lightest to strongest. Slightly stronger than a neutral
+     grey would be, because forest at a low alpha over a warm surface
+     reads fainter than near-black does over white. */
+  --navbar-border: rgba(20, 61, 43, 0.09);
+  --footer-border: rgba(20, 61, 43, 0.09);
+  --sidebar-border: rgba(20, 61, 43, 0);
+  --border-muted: rgba(20, 61, 43, 0.13);
+  --border: rgba(20, 61, 43, 0.2);
+  --ring: rgba(20, 61, 43, 0.2);
+  --secondary: rgba(20, 61, 43, 0.13);
 
-/* color-scheme keeps form controls, scrollbars and the overscroll gutter
-   on the same side as the palette above. */
-:root {
+  /* Fills: the sidebar's active pill, inline code, quiet chips. */
+  --muted: rgba(20, 61, 43, 0.06);
+  --accent: rgba(20, 61, 43, 0.08);
+  --sidebar-accent: rgba(20, 61, 43, 0.08);
+  --sidebar-ring: rgba(20, 61, 43, 0.13);
+
+  --selection-bg: rgba(20, 61, 43, 0.14);
+
   color-scheme: light;
 }
 
-:root[data-theme="dark"],
+/* The kit's reversed pairing: citron on the deep green field, which is
+   the inversion the site uses for its one dark band. Cards lift to
+   forest so a panel separates from the page the way it does in light. */
 :root.dark,
+:root[data-theme="dark"],
+html.dark,
 .dark-mode {
+  --background: #0c281c;
+  --content-bg: #0c281c;
+  --navbar-bg: #0c281c;
+  --card: #143d2b;
+  --popover: #143d2b;
+  --primary: #0c281c;
+  --sidebar: #0c281c;
+  --sidebar-bg: #0c281c;
+  --sidebar-primary: #0c281c;
+
+  --body: #fbfcec;
+  --foreground: #fbfcec;
+  --heading: #fbfcec;
+  --link: #fbfcec;
+  --sub-text: rgba(251, 252, 236, 0.66);
+  --toc-text: rgba(251, 252, 236, 0.66);
+  --toc-active-text: #fbfcec;
+  --sidebar-foreground: rgba(251, 252, 236, 0.66);
+  --sidebar-accent-foreground: #fbfcec;
+  --sidebar-primary-foreground: #fbfcec;
+
+  /* Citron carries the accent here, so its label is the deep green. */
+  --brand: #dce962;
+  --brand-text: #0c281c;
+
+  --navbar-border: rgba(251, 252, 236, 0.12);
+  --footer-border: rgba(251, 252, 236, 0.12);
+  --sidebar-border: rgba(251, 252, 236, 0.12);
+  --border-muted: rgba(251, 252, 236, 0.16);
+  --border: rgba(251, 252, 236, 0.24);
+  --ring: rgba(251, 252, 236, 0.24);
+  --secondary: rgba(251, 252, 236, 0.16);
+
+  --muted: rgba(251, 252, 236, 0.08);
+  --accent: rgba(251, 252, 236, 0.1);
+  --sidebar-accent: rgba(251, 252, 236, 0.1);
+  --sidebar-ring: rgba(251, 252, 236, 0.16);
+
+  --selection-bg: rgba(220, 233, 98, 0.22);
+
   color-scheme: dark;
 }
 
-body {
-  font-family: var(--hl-sans);
-  -webkit-font-smoothing: antialiased;
+/* Fallback for a theme that stops using a class and follows the OS.
+   Guarded, so an explicitly light page on a dark machine is not
+   dragged into it. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]) {
+    --background: #0c281c;
+    --content-bg: #0c281c;
+    --navbar-bg: #0c281c;
+    --card: #143d2b;
+    --popover: #143d2b;
+    --body: #fbfcec;
+    --foreground: #fbfcec;
+    --heading: #fbfcec;
+    --brand: #dce962;
+    --brand-text: #0c281c;
+    color-scheme: dark;
+  }
 }
 
 /* ─── Type ─────────────────────────────────────────────────── */
+
+body {
+  background-color: var(--background);
+  color: var(--body);
+  font-family: var(--hl-sans);
+  -webkit-font-smoothing: antialiased;
+}
 
 h1,
 h2,
@@ -117,7 +190,6 @@ h5,
 h6 {
   font-family: var(--hl-heading);
   font-weight: 600;
-  color: var(--hl-ink);
   line-height: 1.25;
 }
 
@@ -129,40 +201,13 @@ h1 {
 
 /* Forest sits close to body text, so prose links carry an underline
    the way the site's article body does. Without it a link inside a
-   paragraph is only a shade away from the sentence around it.
-   Scoped to paragraphs, list items and table cells, so navigation,
-   cards and headings are left alone. */
+   paragraph is only a shade away from the sentence around it. Scoped
+   to paragraphs, list items and table cells, so navigation, cards and
+   headings keep the theme's own treatment. */
 main p > a,
 main li > a,
 main td > a {
   text-decoration: underline;
   text-decoration-thickness: from-font;
   text-underline-offset: 0.18em;
-}
-
-/* ─── Code ─────────────────────────────────────────────────── */
-
-/* Monospace stays monospace here, unlike on the marketing site, which
-   aliases its mono token to Figtree. That works there because its only
-   code is a short technical label; these pages carry real shell
-   commands and tables of scopes, which need the alignment. */
-
-:not(pre) > code {
-  background: color-mix(in srgb, var(--hl-ink) 6%, transparent);
-  border-radius: 4px;
-}
-
-pre {
-  border-radius: 12px;
-}
-
-/* ─── Rules ────────────────────────────────────────────────── */
-
-hr {
-  border-color: var(--hl-rule-md);
-}
-
-table th,
-table td {
-  border-color: var(--hl-rule);
 }

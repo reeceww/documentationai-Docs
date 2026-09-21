@@ -92,7 +92,7 @@
             "icon": "users",
             "pages": [
               {
-                "title": "For Creators",
+                "title": "Overview",
                 "path": "for-creators",
                 "icon": "user"
               },
