@@ -53,16 +53,28 @@
   --hl-sans: "Figtree", system-ui, -apple-system, sans-serif;
   --hl-heading: "Manrope", system-ui, -apple-system, sans-serif;
 
-  /* Surfaces. Flat, like the site: one field, hairlines for structure. */
+  /* Surfaces. The atlas template floats a rounded content card on a
+     surrounding gutter: the card reads `--background`, the gutter, the
+     sidebar and the navbar read `--sidebar`. The two sit one step apart
+     rather than in contrast, which is as much separation as a flat
+     brand wants.
+
+     `--card` tracks `--background` rather than lifting off it, and that
+     is load bearing. The previous/next links at the foot of each page
+     are `bg-card` with square corners, no border and a box sized to
+     their text, so a card colour that differs from the page draws a
+     hard-edged rectangle around each one. */
   --background: #fbfcec;
   --content-bg: #fbfcec;
-  --navbar-bg: #fbfcec;
   --card: #fbfcec;
   --popover: #fbfcec;
   --primary: #fbfcec;
-  --sidebar: #fbfcec;
-  --sidebar-bg: #fbfcec;
-  --sidebar-primary: #fbfcec;
+
+  /* The gutter the card sits on: forest at 4% over the surface. */
+  --sidebar: #f2f4e4;
+  --sidebar-bg: #f2f4e4;
+  --navbar-bg: #f2f4e4;
+  --sidebar-primary: #f2f4e4;
 
   /* Text. `--body`, `--heading` and `--brand` also come from
      documentation.json; repeated here so the file reads as one palette
@@ -124,22 +136,18 @@
 :root[data-theme="dark"],
 html.dark,
 .dark-mode {
-  /* `--card` and `--popover` track `--background` rather than lifting
-     off it, which is the relationship the theme ships in both modes and
-     is load bearing. The previous/next footer links are `bg-card` with
-     square corners and no border, sized to their text: they are meant
-     to be invisible, and a card colour that differs from the page turns
-     each one into a hard-edged rectangle. Overlays get their separation
-     from a border and a shadow, not from a fill. */
+  /* The card is the deep green; the gutter around it steps toward
+     forest. See the light block for why `--card` tracks `--background`. */
   --background: #0c281c;
   --content-bg: #0c281c;
-  --navbar-bg: #0c281c;
   --card: #0c281c;
   --popover: #0c281c;
   --primary: #0c281c;
-  --sidebar: #0c281c;
-  --sidebar-bg: #0c281c;
-  --sidebar-primary: #0c281c;
+
+  --sidebar: #0f3022;
+  --sidebar-bg: #0f3022;
+  --navbar-bg: #0f3022;
+  --sidebar-primary: #0f3022;
 
   --body: #fbfcec;
   --foreground: #fbfcec;
@@ -187,9 +195,11 @@ html.dark,
   :root:not(.light):not([data-theme="light"]) {
     --background: #0c281c;
     --content-bg: #0c281c;
-    --navbar-bg: #0c281c;
     --card: #0c281c;
     --popover: #0c281c;
+    --sidebar: #0f3022;
+    --sidebar-bg: #0f3022;
+    --navbar-bg: #0f3022;
     --body: #fbfcec;
     --foreground: #fbfcec;
     --heading: #fbfcec;
