@@ -27,6 +27,11 @@
                 "title": "Quick Start",
                 "path": "quickstart",
                 "icon": "zap"
+              },
+              {
+                "title": "Plans and Limits",
+                "path": "plans",
+                "icon": "credit-card"
               }
             ]
           },
@@ -38,6 +43,21 @@
                 "title": "Features",
                 "path": "features",
                 "icon": "star"
+              },
+              {
+                "title": "The Hub",
+                "path": "hub",
+                "icon": "layout-grid"
+              },
+              {
+                "title": "Royalties and Payouts",
+                "path": "royalties-and-payouts",
+                "icon": "percent"
+              },
+              {
+                "title": "Gifting",
+                "path": "gifting",
+                "icon": "gift"
               }
             ]
           },
@@ -49,6 +69,27 @@
                 "title": "Integrations",
                 "path": "integrations",
                 "icon": "plug"
+              },
+              {
+                "title": "Settings",
+                "path": "settings",
+                "icon": "settings"
+              }
+            ]
+          },
+          {
+            "group": "For Creators",
+            "icon": "users",
+            "pages": [
+              {
+                "title": "For Creators",
+                "path": "for-creators",
+                "icon": "user"
+              },
+              {
+                "title": "Your Earnings",
+                "path": "for-creators/earnings",
+                "icon": "wallet"
               }
             ]
           }

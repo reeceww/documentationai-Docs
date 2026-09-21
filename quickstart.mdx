@@ -36,7 +36,7 @@ Shopify and Stripe can wait. Meta is the one connection the core loop depends on
 
   <Step title="Choose a plan" icon="credit-card">
 
-  The workspace stays locked until a plan is chosen. Pick the tier that matches how many creators and team members you need.
+  The workspace stays locked until a plan is chosen. New subscriptions start with a 7 day trial, and the tiers differ on how many creators and team members a workspace may hold. See [Plans and limits](/plans).
 
   </Step>
 </Steps>
@@ -75,11 +75,16 @@ Still in **Settings**, open the royalty terms card. These are the default terms 
 |---|---|
 | Payout model | Percent of revenue, a flat fee per order, or a rate against ad delivery |
 | Rate | The percentage or amount, depending on the model |
+| Submission fee | Paid once when a video is approved, on top of the model |
 | Payout cap | The most a single video can ever earn. Leave blank for uncapped |
 | Hold period | Days before an earned balance becomes available to cash out |
-| Payout schedule | Weekly, fortnightly or monthly |
+| Minimum payout | The smallest amount a creator can cash out |
 
 Terms are frozen onto a video when it is approved. Changing them later reprices new work, never work already approved.
+
+<Card title="Royalties and payouts" icon="percent" href="/royalties-and-payouts" horizontal>
+  Every field in full, plus retainers, bonuses and how a pay run works.
+</Card>
 
 ## Invite a creator
 
@@ -90,7 +95,9 @@ Go to **People** and invite a creator by email. The invitation shows them the te
 <Steps>
   <Step title="The creator uploads" icon="upload">
 
-  In **Hub**, the creator uploads a video against your brief. Files up to 500 MB, in the formats listed in [How do I upload content](/help-center/faq/how-to-upload-ugc).
+  In **Hub**, the creator uploads a video. Files up to 500 MB, in the formats listed in [How do I upload content](/help-center/faq/how-to-upload-ugc).
+
+  A brief is not a separate object in Hotline. Briefs live on boards and pages in the Hub, which is where creators go to read them.
 
   </Step>
 
@@ -123,21 +130,23 @@ Go to **People** and invite a creator by email. The invitation shows them the te
 
 Balances clear after the hold period and then appear in **Payouts**. Start a pay run, and Hotline charges you the creators' royalties plus payment processing at cost, then pays each creator through Stripe Connect into an account they own.
 
+You can also put pay runs on a schedule, so a saved payment method is charged weekly, fortnightly or monthly without anyone opening Stripe.
+
 Creators onboard to Stripe themselves. Hotline never holds their money.
 
 ## Where things live
 
 <Columns cols={2}>
-  <Card title="Hub" icon="layout-grid">
-    Content review, boards, pages and gifting.
+  <Card title="Hub" icon="layout-grid" href="/hub">
+    Boards, pages, ad research, content review and gifting.
   </Card>
   <Card title="Analytics" icon="bar-chart-3">
     Spend, revenue, ROAS and the top performing creatives across the account.
   </Card>
   <Card title="People" icon="users">
-    Your roster, each creator's terms, and what their videos have earned.
+    Your roster, each creator's terms, what their videos have earned, and which countries their ads reached.
   </Card>
-  <Card title="Payouts" icon="dollar-sign">
+  <Card title="Payouts" icon="dollar-sign" href="/royalties-and-payouts">
     Pay runs, balances and payout history.
   </Card>
 </Columns>

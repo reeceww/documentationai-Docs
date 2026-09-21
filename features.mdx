@@ -26,6 +26,9 @@ Hotline covers the whole life of a creator video: it arrives, gets reviewed, bec
   <Card title="Gifting" icon="gift" href="#gifting">
     Send free product from your Shopify catalogue and track the parcel.
   </Card>
+  <Card title="Ad research" icon="search" href="#ad-research">
+    Search the Meta Ad Library and save what you find to a board.
+  </Card>
 </Columns>
 
 ## Content review
@@ -56,6 +59,8 @@ A creative running as several ads can be read either way:
 - **Aggregated**, one card per video with a variant count and combined figures
 
 Where Meta provides incremental attribution, iROAS uses it. Where it does not, the card shows an estimate and says so rather than presenting a modelled figure as measured.
+
+A separate daily sync breaks the same performance down by country. It appears per creator on **People**, showing where their ads reached people and what happened there: impressions, clicks, spend, conversions and ROAS by market.
 
 <Callout kind="warning">
   Creators see impressions, clicks, CTR and earnings for their own videos only. Account wide spend, ROAS and other creators on the roster are never shown to them.
@@ -91,7 +96,13 @@ Earnings accrue nightly. A balance becomes available after the hold period, and 
 
 A pay run charges the brand the creators' royalties plus payment processing at cost, and pays each creator through **Stripe Connect** into an account the creator owns and onboarded to themselves. Hotline collects from the brand first and pays creators only once that settles, so it never fronts the money and never keeps any of it.
 
+Pay runs can be run by hand or put on a schedule. A scheduled run charges a payment method the brand has authorised in advance, so creators are paid weekly, fortnightly or monthly with nobody clicking through Stripe.
+
 Creators can also cash out themselves once they clear the minimum, and can turn on automatic cash outs at a threshold they choose.
+
+<Card title="Royalties and payouts" icon="percent" href="/royalties-and-payouts" horizontal>
+  Terms in full, retainers and bonuses, both kinds of pay run, and cashing out.
+</Card>
 
 ## Gifting
 
@@ -99,13 +110,29 @@ With Shopify connected, creators request products from your real catalogue, or y
 
 An approved request creates a **draft order at a 100% discount** in your store and completes it. Nothing is charged and no payment method is used. When you fulfil the order, tracking flows back and the shipment is tracked through to delivery inside Hotline.
 
+Limits on what a creator can ask for, preset bundles, and automatic approval under a value are all configurable.
+
+<Card title="Gifting" icon="gift" href="/gifting" horizontal>
+  Requests, bundles, limits and tracking in detail.
+</Card>
+
+## Ad research
+
+**Discovery**, inside the Hub, searches the Meta Ad Library so a brand can look at what else is running before briefing the next batch. It has three views: a keyword and brand search with filters for country, ad status and media type; a feed of the latest ads from brands you follow; and recommendations based on what you have been searching and saving.
+
+Any ad can be saved straight to a board, which puts a competitor's creative next to the brief that answers it. Discovery is brand only.
+
+<Callout kind="info">
+  This is ad discovery, not creator discovery. Hotline has no roster to browse and does not source creators for you.
+</Callout>
+
 ## Working surfaces
 
 <Columns cols={2}>
-  <Card title="Boards" icon="layout-grid">
-    Collect ads and creatives into boards, and share a board by link with people who have no account.
+  <Card title="Boards" icon="layout-grid" href="/hub#boards">
+    Collect ads and creatives into boards, and share a board by link with people who have no account. A share link can carry a password and an expiry.
   </Card>
-  <Card title="Pages" icon="file-text">
+  <Card title="Pages" icon="file-text" href="/hub#pages">
     A block editor for briefs and documents, shareable with creators or by public link.
   </Card>
   <Card title="Messages" icon="message-square">

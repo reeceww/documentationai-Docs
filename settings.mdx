@@ -1,0 +1,91 @@
+---
+title: Settings
+description: Every tab in Settings, what lives on it, and which ones a creator sees.
+---
+
+## Two different Settings
+
+Settings shows a different set of tabs depending on your role. A brand configures the workspace; a creator configures themselves.
+
+<Columns cols={2}>
+  <Card title="Brand" icon="building-2">
+    Profile, General, Integrations, Royalty Terms, Billing, Notifications
+  </Card>
+  <Card title="Creator" icon="users">
+    Profile, Payouts, Notifications
+  </Card>
+</Columns>
+
+## Profile
+
+Your name, photo and account security. Both roles have it and it is the same page for each, because it is about you rather than about the workspace.
+
+## General
+
+Brand only. Workspace name, URL slug, logo, and the **payout currency** creators are paid in. Twenty currencies are supported, including USD, AUD, GBP, EUR, CAD and NZD.
+
+<Callout kind="warning">
+  The payout currency is what earnings are denominated in. A pay run refuses a set of earnings that does not match it, so changing it on a workspace with live balances needs thought rather than a quick edit.
+</Callout>
+
+Deleting the workspace lives here too, under its own heading.
+
+## Integrations
+
+Brand only, and the only place integrations are connected. None of them are part of onboarding.
+
+<Steps>
+  <Step title="Meta" icon="megaphone">
+    Connect your Business account and choose the ad account this workspace publishes into and reads from.
+  </Step>
+  <Step title="Shopify" icon="shopping-cart">
+    Link the store whose catalogue creators request product from.
+  </Step>
+</Steps>
+
+Two cards appear underneath once the integration they belong to is connected:
+
+- **Gifting policy**, once Shopify is connected. The limits on what creators can request. See [Gifting](/gifting#setting-limits).
+- **Adset templates**, once Meta is connected. Saved adset configurations you can build an ad into when publishing, instead of duplicating an existing adset every time.
+
+Klaviyo and Slack appear at the bottom as placeholders. Neither does anything yet.
+
+## Royalty Terms
+
+Brand only. The default terms every new creator inherits, and any alternative sets you keep. Covered in full in [Royalties and payouts](/royalties-and-payouts#royalty-terms).
+
+## Billing
+
+Brand only. Your plan, what it allows, and what you are using against it. See [Plans and limits](/plans).
+
+Automatic pay runs are configured here as well as on the Payouts page, since a saved payment method is a billing concern as much as a payouts one.
+
+## Payouts
+
+Creator only. Two cards:
+
+- **Stripe Connect**, where a creator onboards to the account their money will land in. Nothing can be withdrawn until this is finished.
+- **Automatic cash outs**, a switch and a threshold. It cannot be turned on without a payout method, and says so rather than failing when a creator tries.
+
+## Notifications
+
+Both roles. Three email toggles, each covering the in-app notifications of the same kind:
+
+| Toggle | Covers |
+|---|---|
+| New messages | Somebody sent you a message |
+| Content updates | Approvals, rejections, revision requests and ad links |
+| Payout updates | Payout requests, approvals and transfers |
+
+Turning an email off does not turn off the in-app notification.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Integrations" icon="plug" href="/integrations" horizontal>
+    What each integration can see and change.
+  </Card>
+  <Card title="Plans and limits" icon="credit-card" href="/plans" horizontal>
+    What each tier costs and allows.
+  </Card>
+</Columns>

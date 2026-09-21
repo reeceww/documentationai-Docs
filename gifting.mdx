@@ -1,0 +1,80 @@
+---
+title: Gifting
+description: Send creators free product from your Shopify catalogue, set limits on what they can ask for, and track the parcel to the door.
+---
+
+## What gifting does
+
+With Shopify connected, your real product catalogue appears in the Hub. Creators request what they need to film with, you approve it, and Hotline creates the order in your store and tracks the shipment through to delivery.
+
+<Callout kind="info">
+  Gifting needs Shopify. Everything else in Hotline works without it.
+</Callout>
+
+## How an order is created
+
+An approved request creates a **draft order at a 100% discount** in your store and completes it. Nothing is charged, no payment method is used, and it is the only kind of order Hotline ever creates.
+
+The creator's name, email and shipping address come from their own profile and are passed to Shopify so the parcel can be addressed. Hotline does not read your customer records and stores no Shopify customer identifier.
+
+## Two ways product moves
+
+<Columns cols={2}>
+  <Card title="A creator requests" icon="hand">
+    They browse the catalogue in **Hub**, then **Products**, and submit a request. You approve or decline it.
+  </Card>
+  <Card title="You send directly" icon="send">
+    From **Hub**, then **Gifting**, send product to a creator without waiting to be asked.
+  </Card>
+</Columns>
+
+A creator cannot request anything until they have a shipping address on file, which is one of the steps in their onboarding.
+
+## Bundles
+
+A bundle is a preset a creator picks from, of the shape "choose three flavours, optionally add an accessory". It saves them guessing what a reasonable ask looks like and saves you declining requests for being the wrong shape.
+
+A bundle has no fixed value. What it costs is the sum of what the creator actually chose, which keeps the per creator budget working without a special case. The consequence is that the cost is unknown until they choose, so a budget warning appears at selection time rather than up front.
+
+Bundles are **draft** while you build them, **active** once creators can request them, and **archived** when you retire one. Archiving hides a bundle without breaking the requests that already reference it.
+
+## Setting limits
+
+Gifting limits live in **Settings**, then **Integrations**, on the gifting policy card. It appears once Shopify is connected.
+
+| Limit | What it caps |
+|---|---|
+| Max items per request | Total quantity in any one request |
+| Cooldown | Minimum days between one creator's requests |
+| Monthly budget per creator | Value shipped to one creator in any rolling 30 day window |
+
+Any of the three can be left blank, which means unlimited.
+
+<Callout kind="warning">
+  Breaking a limit does not block the request. The violation is recorded and shown to whoever reviews it, and the approver decides. A hard block would turn a judgement call into a dead end for a creator who may have had a good reason.
+</Callout>
+
+Individual products carry their own overrides on top: a maximum quantity per request, and whether creators can request that product at all.
+
+### Auto approving small requests
+
+Set a value below which requests are approved on submission, with no review. The order is created and the shipment posts into the chat thread as though you had approved it yourself.
+
+Auto approval only applies to a request with **zero** policy violations. Anything that broke a limit comes to you regardless of how little it is worth.
+
+## Tracking the parcel
+
+When you fulfil the order in Shopify, the tracking details flow back into Hotline and the shipment is followed through to delivery. The shipment appears as a card in the creator's message thread, so the conversation and the parcel stay in the same place.
+
+Creators see their own orders and tracking under **Hub**, then **Products**.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Integrations" icon="plug" href="/integrations#shopify" horizontal>
+    Which Shopify scopes Hotline requests and why.
+  </Card>
+  <Card title="The Hub" icon="layout-grid" href="/hub" horizontal>
+    Where gifting sits alongside the rest of the work.
+  </Card>
+</Columns>
