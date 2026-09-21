@@ -178,8 +178,12 @@
   "description": "Documentation for Hotline UGC, the performance UGC platform for Meta ads. Setup, content review, publishing, royalties and payouts, for brands and creators.",
   "title": "Hotline UGC Docs",
   "template": "atlas",
-  "navbarPrimaryAction": {
-    "title": "Sign Up",
-    "link": "https://app.hotlineugc.com/sign-up"
+  "navbar": {
+    "actions": {
+      "primary": {
+        "title": "Sign Up",
+        "link": "https://app.hotlineugc.com/sign-up"
+      }
+    }
   }
 }
