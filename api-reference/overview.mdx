@@ -5,7 +5,7 @@ description: The Hotline UGC REST API: what it covers, how requests are shaped, 
 
 ## What it is
 
-A read-only REST API over your workspace. Nine endpoints, all `GET`, served from the app itself rather than a separate host:
+A REST API over your workspace. Ten endpoints, nine of them `GET`, served from the app itself rather than a separate host:
 
 ```
 https://app.hotlineugc.com/api/v1
@@ -30,13 +30,29 @@ There is no `api.hotlineugc.com`. If you have an older note pointing at one, it 
 | Royalties | What has accrued, and against which terms |
 | Jobs | The state of a background job |
 
+The one write is [requesting an analysis](/api-reference/endpoints#request-an-analysis).
+
 ## What it does not do
 
-**Nothing writes.** Every endpoint is a `GET`. You cannot approve a video, publish an ad, start a pay run or change terms through the API. Money and publishing stay in the app on purpose.
+**Almost nothing writes.** The single exception queues an analysis on a video you already own. You cannot approve a video, publish an ad, start a pay run or change terms through the API. Money and publishing stay in the app on purpose.
 
 **It is brand side only.** Creator accounts are refused. The data model exists to serve creators too, and a creator-facing surface is a real future feature, but lowering the role floor on the endpoints that exist would hand a creator other creators' deals and the whole royalty ledger.
 
 **There are no webhooks yet.** Hotline receives them from Shopify and Stripe; it does not send them.
+
+## The spec
+
+The API describes itself, from the same deploy that serves it:
+
+```
+GET https://app.hotlineugc.com/api/v1/openapi.json
+```
+
+It is public and needs no credential. It names no workspace and carries no data, because it is the shape of the API rather than anything in it, and you need that before you have a key.
+
+<Callout kind="info">
+  The spec is generated from the running code rather than kept as a file beside it, so it cannot drift from what is deployed.
+</Callout>
 
 ## Request shape
 

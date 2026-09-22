@@ -3,7 +3,7 @@ title: Endpoints
 description: All nine Hotline UGC API endpoints, their parameters and what each returns.
 ---
 
-Every endpoint is a `GET` and every one is under:
+Nine of the ten endpoints are a `GET`, and every one is under:
 
 ```
 https://app.hotlineugc.com/api/v1
@@ -87,6 +87,31 @@ GET /workspaces/{workspaceId}/analysis/{versionId}
 What the creative intelligence pass found on one version: the hook, the angle, the format, the voice, and the reasoning behind each.
 
 Analysis is on Growth and Agency, like the API itself. See [Creative Intelligence](/intelligence).
+
+### Request an analysis
+
+```
+POST /workspaces/{workspaceId}/analysis-jobs
+```
+
+The only write in v1. It queues an analysis on a video you already own and returns a job to poll at `/jobs/{jobId}`.
+
+```json
+{ "content_version_id": "..." }
+```
+
+<Callout kind="alert">
+  That is a **version** id, not a content id. A creative has versions, and the analysis is of one of them.
+</Callout>
+
+This endpoint is gated on Creative Intelligence rather than on the API alone, and refuses with `plan_required` when the workspace does not carry it.
+
+#### Retrying safely
+
+The request is idempotent twice over, which matters because a client that times out cannot tell whether the work started.
+
+- **The same video is not analysed twice.** A dedupe key built from the version, the analysis schema and the provider configuration drops a repeat for 24 hours, whatever the caller does.
+- **Send an `Idempotency-Key` header** and a retry returns the same *response*, not merely the same outcome. That is the part a client with a timeout actually needs.
 
 ## Performance
 

@@ -5,6 +5,32 @@ description: What has changed in Hotline UGC, newest first.
 
 Changes that affect what you see and do in the product. Dates are when the change reached production.
 
+<Update label="2026-09-22" description="API and briefs" tags={["feature", "improvement"]}>
+
+## The API describes itself
+
+`GET /api/v1/openapi.json` serves the spec, publicly and without a credential. It is generated from the running code rather than kept as a file beside it, so it cannot drift from what is deployed.
+
+## One endpoint now writes
+
+`POST /analysis-jobs` queues an analysis on a video you already own and returns a job to poll. It is idempotent twice over: the same video is never analysed twice inside 24 hours, and an `Idempotency-Key` header makes a retry return the same response rather than merely the same outcome.
+
+Everything else stays read only.
+
+## Creators can claim a brief
+
+A creator can take a brief, or a brand can put a named creator on one. Claims are capped at the brief's target count, so a brief asking for five videos cannot hand out six.
+
+Giving a brief back marks the claim released rather than deleting it, because a creator dropping a brief days before the deadline is worth knowing.
+
+A creator's Briefs tab is now in two parts, the briefs they hold and the ones still going spare.
+
+## Briefs carry attachments
+
+Documents and boards can be linked from a brief, so the reference material sits with the ask.
+
+</Update>
+
 <Update label="2026-09-21" description="API, MCP and Creative Intelligence" tags={["feature"]}>
 
 ## A read-only API, on Growth and Agency
