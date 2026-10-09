@@ -51,11 +51,29 @@ Three things sit on top of whichever base model is set.
 
 A **retainer** is a floor rather than a fee. Set a floor amount, a period and a goal in approved videos. At the end of the period, if the creator met the goal, Hotline tops up the difference between their royalties and the floor. A creator who earned more than the floor gets no top up, because the floor was already cleared. Retainers are evaluated monthly, on the first of the month.
 
-## Caps and freezing
+## Three places terms can come from
 
-A **payout cap** is the most a single video can ever earn. It is shared across every ad running that video, so duplicating a creative into four adsets does not multiply what it can pay out.
+Terms resolve in order, most specific first:
+
+| Level | Set in |
+|---|---|
+| This video | The Terms panel on the creative's card |
+| This creator | Their row in **People** |
+| The workspace | **Settings**, then **Royalty Terms** |
+
+A single video can be given its own rate without touching the creator's deal, which is how "double royalties on the new flavour" works without editing every creator one at a time.
+
+## Freezing, and then locking
 
 Terms are **frozen onto a video when it is approved**. Editing a creator's terms afterwards prices their new work and never touches work already approved. Two videos by the same creator can carry different terms, and each one reports against its own.
+
+Once a video **goes live as an ad in Meta**, those terms are locked for good. Nothing moves them afterwards: not a change to the creator's deal, not un-approving and re-approving, not the Terms panel, which becomes read-only and says why. Re-approving a live video pays no second submission fee.
+
+<Callout kind="alert">
+  The lock is a money rule, not only a promise. The nightly accrual prices every ad day that has no figure yet, however old, and under a revenue share a day with no sales stays open in case a sale is attributed to it later. Switching a live video to a delivery model would pay that whole backlog at once.
+</Callout>
+
+A **payout cap** is the most a single video can ever earn. It is shared across every ad running that video, so duplicating a creative into four adsets does not multiply what it can pay out.
 
 ## From earning to bank account
 

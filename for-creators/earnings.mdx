@@ -3,21 +3,31 @@ title: Your earnings
 description: How royalties are calculated, when a balance becomes yours to take, and how to cash out.
 ---
 
-## The three balances
+## The four figures
 
-**Earnings** shows your money in three figures.
+**Earnings** opens on four tiles.
 
-<Columns cols={3}>
-  <Card title="Available to cash out" icon="wallet">
-    Cleared, and yours to take now.
+| Tile | What it is |
+|---|---|
+| Available to Cash Out | Cleared, and yours to take now |
+| Owed to You | Earned, and not yet paid by the brand |
+| Total Paid | What the brand has paid you, all time |
+| Lifetime Earned | Everything you have earned in this workspace |
+
+### Paid and owed
+
+Underneath, the same money is broken into the stage each amount is at, so there is no gap between what you are owed and what has arrived.
+
+<Columns cols={2}>
+  <Card title="Owed to you" icon="clock">
+    On hold, waiting for the pay run, or sitting in a pay run the brand has not completed.
   </Card>
-  <Card title="Pending settlement" icon="clock">
-    Earned, but still inside the hold period.
-  </Card>
-  <Card title="Lifetime earned" icon="trending-up">
-    Everything you have earned in this workspace.
+  <Card title="Paid to you" icon="wallet">
+    Clearing, ready to cash out, already cashed out, or paid to you directly.
   </Card>
 </Columns>
+
+The two sides add up to their totals, so a figure can always be traced to a stage.
 
 ## How a video earns
 
@@ -26,8 +36,10 @@ Your royalties are worked out once a day from what your ads actually did, agains
 The same page shows you those terms: your share, the cap on each piece of content, the hold period and the minimum payout. If you are unsure what a video earns on, that card is the answer rather than a conversation.
 
 <Callout kind="info">
-  Terms are frozen onto a video when the brand approves it. If they change your rate afterwards, it applies to your new work and never to work already approved. Two of your videos can carry different terms, and each one reports against its own.
+  Terms are frozen onto a video when the brand approves it, and locked for good once that video goes live as an ad. If they change your rate afterwards it applies to your new work, never to work already approved. Two of your videos can carry different terms, and each one reports against its own.
 </Callout>
+
+Each approved video carries a bar showing what it has earned against its cap, and opens a read-only view of the terms locked onto it. You cannot edit those, and you will never see the workspace defaults or another creator's deal.
 
 ### What the brand can set
 
@@ -69,6 +81,8 @@ Until Stripe onboarding is finished your earnings still accrue and still settle.
 Once your available balance clears the minimum payout, cash out from **Earnings** whenever you want.
 
 You can also turn on **automatic cash outs** in **Settings**, then **Payouts**, and set your own threshold. Hotline checks once a day and sends anything over it without you asking. The switch needs a connected payout method, and says so rather than failing when you try.
+
+The date of the brand's next scheduled pay run is shown beside the money waiting for one, so you can see when it is due rather than having to ask.
 
 <Callout kind="info">
   Brands can pay on a schedule of their own, so money can arrive in your balance without either of you doing anything. Automatic cash outs on your side mean it carries on into your bank account the same way.

@@ -55,8 +55,8 @@
                 "icon": "star"
               },
               {
-                "title": "The Hub",
-                "path": "hub",
+                "title": "Content",
+                "path": "content",
                 "icon": "layout-grid"
               },
               {
@@ -210,5 +210,12 @@
         "link": "https://app.hotlineugc.com/sign-up"
       }
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/hub",
+      "destination": "/content",
+      "statusCode": 308
+    }
+  ]
 }
